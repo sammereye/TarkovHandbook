@@ -17,7 +17,7 @@ body {
   align-items: center;
   width: 750px;
   height: fit-content;
-  margin-top: 400px;
+  margin-top: 25vh;
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
   border-radius: 10px;
   background-color: rgb(27 27 30 / 98%);
@@ -81,6 +81,14 @@ body {
   display: flex;
   align-items: center;
   color: #e3e3ed;
+}
+
+.search-row:nth-of-type(odd) {
+  background-color: #161618;
+}
+
+.quest-row:nth-of-type(4n+2) {
+  background-color: #161618;
 }
 
 .name-container {

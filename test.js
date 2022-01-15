@@ -1,7 +1,6 @@
 
 const request = require('request');
 const cheerio = require('cheerio');
-const { text } = require('cheerio/lib/api/manipulation');
 
 let url = 'https://escapefromtarkov.fandom.com/wiki/Gunsmith_-_Part_1';
 
