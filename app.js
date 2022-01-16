@@ -7,7 +7,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 // PRODUCTION
-// let confFileName = fs.readFileSync(path.join(path.dirname(__dirname), 'app','public/db/config.json'));
+// let confFileName = path.join(path.dirname(__dirname), 'app','public/db/config.json');
 // DEVELOPMENT
 let confFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/config.json');
 let confFile = fs.readFileSync(confFileName)

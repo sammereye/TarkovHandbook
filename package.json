@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . TarkovHandbook --overwrite --platform=win32 --arch=ia32 --prune=true"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +19,10 @@
   },
   "devDependencies": {
     "electron-packager": "^15.4.0"
+  },
+  "build": {
+    "extraFiles": [
+      "public"
+    ]
   }
 }
