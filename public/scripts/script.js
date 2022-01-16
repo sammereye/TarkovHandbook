@@ -18,8 +18,13 @@ $(document).ready(() => {
       //     $('.hotkey').text(currentKey);
       // }
       $('.search-results-container').hide();
-      $('.search-input').focus()
+      $('.search-input').focus();
       $('.search-input').val('');
+      $('.active-tab').removeClass('active-tab');
+      $('.items-button').addClass('active-tab');
+      activeTab = 'items';
+      $('.search-input').attr('placeholder', 'Search for an item...');
+      $('.quest-subtab-container').hide();
       ipc.send('close')
   }
 
@@ -155,6 +160,12 @@ $(document).ready(() => {
         }
       }
 
+      let basePrice = data[i].basePrice;
+      let avgPrice = data[i].avg24hPrice;
+
+      let fee = Math.round((basePrice * 0.09 * Math.pow(4, Math.pow(Math.log10(basePrice / avgPrice), (avgPrice < basePrice ? 1.08 : 1))) + avgPrice * Math.pow(4, Math.pow(Math.log10(avgPrice / basePrice), (basePrice <= avgPrice ? 1.08 : 1))) * 0.05));
+      let priceAfterFee = avgPrice - fee;
+
       $('.search-results-container').append(
         $('<div/>', {
           class: 'search-row'
@@ -163,7 +174,7 @@ $(document).ready(() => {
         ).append(
           $('<div/>', {
             class: 'average',
-            text: `₽${data[i].avg24hPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+            html: `₽${avgPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span class="fee-price">₽(${priceAfterFee.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")})</span>`
           })
         ).append(
           $('<div/>', {
@@ -462,11 +473,11 @@ $(document).ready(() => {
   });
 
 
-  // $('.search-input').on('blur', () => {
-  //   if (!interactingWithApp) {
-  //     reset(ipcRenderer);
-  //   }
-  // })
+  $('.search-input').on('blur', () => {
+    if (!interactingWithApp) {
+      reset(ipcRenderer);
+    }
+  })
 
   $('.hotkey').on('click', (e) => {
     settingHotkey[$(e.target).data().id] = !settingHotkey[$(e.target).data().id]

@@ -100,3 +100,12 @@ request({
   paragraph += '</div>';
   console.log(paragraph)
 });
+
+let basePrice = 10000;
+let quantity = 1;
+let offer = 15000;
+let tax1 = 0.09;
+let tax2 = 0.05;
+let offerValue = basePrice * quanity
+
+let fee = ((offerValue) * (tax1) * Math.pow(4, Math.log10(offerValue / offer)) * quantity * offer * Math.pow(4, 1.08) * quantity)

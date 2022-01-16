@@ -144,7 +144,7 @@ async function makeSynchronousRequestForHideout(request) {
 
   db = new MiniSearch({
     fields: ['name', 'shortName'], // fields to index for full-text search
-    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices'], // fields to return with search results
+    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices', 'basePrice'], // fields to return with search results
     searchOptions: {
       fuzzy: 0.2, 
       prefix: true,
