@@ -18,18 +18,26 @@ The Tarkov Handbook is an open-source, free to use tool that compiles all of the
 	- Craftables w/ their profit values
 
 **Market Search:**
-<img src="https://media2.giphy.com/media/K1HcyhqdjuAmlJz4H0/giphy.gif?cid=790b7611fc145c1328ad27cd1550f0c531228b6185e800b6&rid=giphy.gif" height="300" />
+<br>
+<br>
+<img src="https://media2.giphy.com/media/K1HcyhqdjuAmlJz4H0/giphy.gif?cid=790b7611fc145c1328ad27cd1550f0c531228b6185e800b6&rid=giphy.gif" height="400" />
 
 **Quest Search:**
-<img src="https://media4.giphy.com/media/EnYPZNE0y44nhqiB6X/giphy.gif?cid=790b76117f66901ce498b22dabb8348657f6f70a19f7e27a&rid=giphy.gif" height="300" />
+<br>
+<br>
+<img src="https://i.giphy.com/media/EnYPZNE0y44nhqiB6X/giphy.webp" height="400" />
 <br>
 
 **Quest Search (Gunsmith):**
-<img src="https://media4.giphy.com/media/9IPjH9GB5w918XVNft/giphy.gif?cid=790b7611f1fe7f7765d41f90d629deddd1f3cbeb93ca0810&rid=giphy.gif" height="300" />
+<br>
+<br>
+<img src="https://media4.giphy.com/media/9IPjH9GB5w918XVNft/giphy.gif?cid=790b7611f1fe7f7765d41f90d629deddd1f3cbeb93ca0810&rid=giphy.gif" height="400" />
 <br>
 
 **Hideout Stations/Crafting:**
-<img src="https://media0.giphy.com/media/wbQEBTX2fkW5bTKvd0/giphy.gif?cid=790b76111464e9fbd8b11c02bb82e950e6cd5dd738697b1d&rid=giphy.gif" height="300" />
+<br>
+<br>
+<img src="https://media0.giphy.com/media/wbQEBTX2fkW5bTKvd0/giphy.gif?cid=790b76111464e9fbd8b11c02bb82e950e6cd5dd738697b1d&rid=giphy.gif" height="400" />
 <br>
 
 ## Will I get banned?
