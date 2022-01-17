@@ -44,7 +44,7 @@ The Tarkov Handbook is an open-source, free to use tool that compiles all of the
 
 Tarkov Handbook is built with the same technologies as Discord (ElectronJS). ElectronJS runs using the Chromium engine which is just a specialized version of Chrome. Everytime you press the hotkey to show this application, it is the equivelant of pressing a hotkey, such as Alt+Tab, to show Discord. It's just minimizing it and maximizing it. It doesn't alter any game files or affect the game in anyway that would be considered a hack. 
 
-Therefore, it is near impossible to banned for using this tool unless Battlestate Games used BattlEye to intentionally target this tool as bannable by reading your system's memory. And that is not happening any time soon. 
+Therefore, it is near impossible to banned for using this tool unless Battlestate Games uses BattlEye to intentionally target this tool as bannable by reading your system's memory. And that is not happening any time soon. 
 
 ## Tools Used / Credit
 
@@ -54,8 +54,8 @@ Therefore, it is near impossible to banned for using this tool unless Battlestat
 
 ## Installation
 
-**Option One (Simpler):**
-Click this link, to download the latest version. Once it is downloaded, extract the files to an easily accessible folder, such as a folder named TarkovHandbook on your Desktop. From there, open the `TarkovHandbook.exe` file and you are ready to go.
+**Simplest Method:**
+Click this [link](https://github.com/sammereye/TarkovHandbook/releases/download/Latest/TarkovHandbook-latest.zip), to download the latest version. Once it is downloaded, extract the files to an easily accessible folder, such as a folder named TarkovHandbook on your Desktop. From there, open the `TarkovHandbook.exe` file and you are ready to go.
 
 **Other things to note:** 
 - Change your game to **Borderless** in the Graphics settings so that the application can easily overlay the game.
