@@ -80,7 +80,7 @@ body {
   background-color: #c1c1cc;
 }
 
-.search-row, .search-header, .quest-header, .quest-row, .hideout-row, .hideout-header {
+.search-row, .search-header, .quest-header, .quest-row, .hideout-row, .hideout-header, .craft-row, .craft-header {
   padding: 12px 0;
   height: fit-content;
   display: flex;
@@ -88,11 +88,11 @@ body {
   width: 100%;
 }
 
-.search-header, .quest-header, .hideout-header {
+.search-header, .quest-header, .hideout-header, .craft-header {
   border-top: none;
 }
 
-.search-row > *, .search-header > *, .quest-row > *, .quest-header > *, .hideout-header > *, .hideout-row > * {
+.search-row > *, .search-header > *, .quest-row > *, .quest-header > *, .hideout-header > *, .hideout-row > *, .craft-header > *, .craft-row > * {
   display: flex;
   align-items: center;
   color: #e3e3ed;
@@ -185,7 +185,7 @@ body {
   width: 100%;
 }
 
-.quest-subtab-container {
+.quest-subtab-container, .hideout-subtab-container {
   display: none;
   width: 100%;
 }
@@ -224,7 +224,7 @@ body {
   color: rgb(228 226 239);
 }
 
-.quest-header, .search-header, .hideout-header {
+.quest-header, .search-header, .hideout-header, .craft-header {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 14px;
@@ -358,6 +358,38 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.craft-input, .craft-output {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 40%;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.craft-output {
+  width: 40%;
+}
+
+.craft-profit {
+  width: 20%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.craft-profit-hour {
+  font-size: 14px;
+  color: #81818d;
+}
+
+.craft-price {
+  color: #656570;
 }
 
 .module-dash {

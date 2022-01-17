@@ -25,6 +25,7 @@ $(document).ready(() => {
       activeTab = 'items';
       $('.search-input').attr('placeholder', 'Search for an item...');
       $('.quest-subtab-container').hide();
+      $('.hideout-subtab-container').hide();
       ipc.send('close')
   }
 
@@ -197,15 +198,17 @@ $(document).ready(() => {
     $(e.target).addClass('active-tab');
     $('.search-input').attr('placeholder', $(e.target).data().placeholder)
     $('.search-input').val('')
-    $('.search-input').focus()
+    
     $('.active-subtab').removeClass('active-subtab')
 
     // Tab-Specific
     if (tab == 'hideout') {
+      $('.hideout-subtab-container').css('display', 'flex')
       $('.search-input').prop('disabled', 'disabled')
-      ipcRenderer.send('getHideout')
     } else {
+      $('.hideout-subtab-container').css('display', 'none')
       $('.search-input').removeAttr('disabled')
+      $('.search-input').focus()
     }
 
     if (tab == 'quests') {
@@ -216,10 +219,16 @@ $(document).ready(() => {
   });
 
   $('.subtab').on('click', (e) => {
-    let traderId = $(e.target).data().id;
+    let subtabId = $(e.target).data().id;
     $('.active-subtab').removeClass('active-subtab')
     $(e.target).addClass('active-subtab')
-    ipcRenderer.send('getQuests', {trader: traderId})
+
+    // If a subtab that is under the hideout section is clicked
+    if ($(e.target).parent().hasClass('hideout-subtab-container'))  {
+      ipcRenderer.send('getHideout', {id: subtabId})
+    } else if ($(e.target).parent().hasClass('quest-subtab-container'))  { // If a subtab that is under the quest section is clicked
+      ipcRenderer.send('getQuests', {trader: subtabId})
+    }
   });
 
   ipcRenderer.on('questResults', (e, data) => {
@@ -351,11 +360,14 @@ $(document).ready(() => {
   });
 
 
-  ipcRenderer.on('hideoutResults', (e, data) => {
+  ipcRenderer.on('stationResults', (e, data) => {
+    $('.search-results-container').css('display', 'none');
     $('.search-header').remove();
     $('.search-row').remove();
     $('.quest-header').remove();
     $('.quest-row').remove();
+    $('.craft-header').remove();
+    $('.craft-row').remove();
     $('.quest-info-container').remove();
 
     $('.search-results-container').append(
@@ -436,6 +448,86 @@ $(document).ready(() => {
           $('<div/>', {class: 'hideout-expand'})
         )
       ).insertAfter(`#hideout-${station}`)
+    }
+
+    $('.search-results-container').css('display', 'flex');
+    $('.search-results-container').html($('.search-results-container').html());
+  });
+
+
+  ipcRenderer.on('craftResults', (e, craftItems) => {
+    $('.search-results-container').css('display', 'none');
+    $('.search-header').remove();
+    $('.search-row').remove();
+    $('.quest-header').remove();
+    $('.quest-row').remove();
+    $('.hideout-header').remove();
+    $('.hideout-row').remove();
+    $('.quest-info-container').remove();
+
+    $('.search-results-container').append(
+      $('<div/>', {
+        class: 'craft-header'
+      }).append(
+        $('<div/>', {class: 'craft-input', text: 'Input'})
+      ).append(
+        $('<div/>', {class: 'craft-output', text: 'Output'})
+      ).append(
+        $('<div/>', {class: 'craft-profit', text: 'Profit'})
+      )
+    )
+
+    let craftList = [];
+
+    for (let i in craftItems) {
+      let noPrice = false;
+      let inputString = '<div>';
+
+      let inputTotal = 0;
+      for (let j in craftItems[i].input) {
+        let totalPrice = craftItems[i].input[j].amount * craftItems[i].input[j].price;
+        inputString += `<div>${craftItems[i].input[j].amount} x ${craftItems[i].input[j].name} <span class="craft-price">(₽${totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")})</span></div>`
+        inputTotal += totalPrice
+
+        if (craftItems[i].input[j].price == 0) {
+          noPrice = true;
+        }
+      }
+
+      inputString += '</div>'
+
+      let outputTotal = craftItems[i].output.amount * craftItems[i].output.price;
+
+      if (craftItems[i].output.price == 0) {
+        noPrice = true;
+      }
+
+      let profit = outputTotal - inputTotal;
+      let profitPerHour = (profit / (craftItems[i].output.duration / 60 / 60))
+
+      craftList.push({
+        input: inputString,
+        output: `${craftItems[i].output.amount} x ${craftItems[i].output.name} <span class="craft-price">(₽${outputTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")})</span>`,
+        profit: noPrice ? 0 : Math.round(profit),
+        profitPerHour: noPrice ? 0 : Math.round(profitPerHour),
+      })
+    }
+
+    craftList.sort((a,b) => b.profit - a.profit)
+
+
+    for (let i in craftList) {
+      $('.search-results-container').append(
+        $('<div/>', {
+          class: 'craft-row'
+        }).append(
+          $('<div/>', {class: 'craft-input', html: craftList[i].input})
+        ).append(
+          $('<div/>', {class: 'craft-output', html: craftList[i].output})
+        ).append(
+          $('<div/>', {class: 'craft-profit', html: `<div>₽${craftList[i].profit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div><div class="craft-profit-hour">(₽${craftList[i].profitPerHour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/h)</div>`})
+        )
+      )
     }
 
     $('.search-results-container').css('display', 'flex');
