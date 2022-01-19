@@ -61,6 +61,7 @@ Click this [link](https://github.com/sammereye/TarkovHandbook/releases/download/
 - Change your game to **Borderless** in the Graphics settings so that the application can easily overlay the game.
 - The default hotkey to Show/Hide the application is `F3`. You can change this in the settings by clicking the cog icon in the top right of the application.
 - While the application is running, you can manually Show and Quit the application by pressing the icon in your system tray (*Click the arrow in the bottom right of your taskbar to launch the system tray*).
+- If you are unable to display the application while in game, it could be because you are running Escape from Tarkov as Administrator. To fix this, you can either run Escape from Tarkov not as administrator or run TarkovHandbook.exe as Administrator so that it has matching screen privileges.
 
 ## Suggestions / Bugs
 If you have any suggestions or issues with the TarkovHandbook, feel free to create an issue by clicking the `Issues` button at the top of this page or click [here](https://github.com/sammereye/TarkovHandbook/issues).
