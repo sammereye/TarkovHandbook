@@ -1,26 +1,41 @@
-// require Electron
-const { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray } = require('electron');
+// #region PACKAGES
+const version = 101;
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray, shell, dialog } = require('electron');
 const fs = require('fs');
 const MiniSearch = require('minisearch');
 const path = require('path');
-const request = require('request');
 const cheerio = require('cheerio');
+const request = require('request');
+const extract = require('extract-zip');
+const { spawn } = require('child_process');
+app.disableHardwareAcceleration();
+// #endregion
 
+// #region DATABASES
 // PRODUCTION
 let confFileName = path.join(path.dirname(__dirname), 'app','public/db/config.json');
 // DEVELOPMENT
 // let confFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/config.json');
-let confFile = fs.readFileSync(confFileName)
-let conf = JSON.parse(confFile)
+let confFile = fs.readFileSync(confFileName);
+let conf = JSON.parse(confFile);
 let toggle = conf.toggle;
 
-app.disableHardwareAcceleration();
+// PRODUCTION
+let progressFileName = path.join(path.dirname(__dirname), 'app','public/db/progress.json');
+// DEVELOPMENT
+// let progressFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/progress.json');
+let progressFile = fs.readFileSync(progressFileName);
+let progress = JSON.parse(progressFile);
+let tray = null;
+// #endregion
 
+// #region DATA INITIALIZATION
 let items = '';
 let itemsDictionary = {};
 let db = '';
 let questItems = {};
 let traders = ['Prapor', 'Therapist', 'Skier', 'Peacekeeper', 'Mechanic', 'Ragman', 'Jaegar', 'Fence']
+let questPathList = []
 
 let options = {
   'method': 'POST',
@@ -73,6 +88,7 @@ async function makeSynchronousRequestForItems(request) {
 
 let quests = '';
 let questDB = '';
+let questPath = {};
 
 let questOptions = {
   url: 'https://raw.githubusercontent.com/TarkovTracker/tarkovdata/master/quests.json',
@@ -142,7 +158,7 @@ async function makeSynchronousRequestForHideout(request) {
 let crafts = '';
 let craftItems = [];
 
-var craftOptions = {
+let craftOptions = {
   'method': 'POST',
   'url': 'https://tarkov-tools.com/graphql',
   'headers': {
@@ -191,7 +207,11 @@ async function makeSynchronousRequestForCrafts(request) {
 	}
 }
 
-(async function () {
+updateData()
+setInterval(updateData, 1000 * 60 * 30)
+
+async function updateData() { 
+  items = '', itemsDictionary = {}, db = '', questItems = {}, quests = '', questDB = '', hideout = '', hideoutItems = {}, crafts = '', craftItems = [];
 	await makeSynchronousRequestForQuests();
   await makeSynchronousRequestForItems();
   await makeSynchronousRequestForHideout();
@@ -215,6 +235,11 @@ async function makeSynchronousRequestForCrafts(request) {
     itemsDictionary[items[i].id] = items[i]
   }
 
+  for (let i in quests) {
+    let questArr = quests[i].require.quests
+    questPath[quests[i].id] = [].concat.apply([], questArr);
+  }
+
   questDB = new MiniSearch({
     fields: ['title'], // fields to index for full-text search
     storeFields: ['giver', 'title', 'locales', 'objectives', 'require', 'wiki'], // fields to return with search results
@@ -236,19 +261,39 @@ async function makeSynchronousRequestForCrafts(request) {
         let item = objective.target;
         let amount = objective.number;
 
-        if (!(item in questItems)) {
-          questItems[item] = []
+        if (!(progress.quests.includes(quests[i].id))) {
+          if (!(item in questItems)) {
+            questItems[item] = []
+          }
+  
+          questItems[item].push({
+            'quest_id': quests[i].id,
+            'title': title,
+            'amount': amount,
+            'completed': false
+          })
         }
-
-        questItems[item].push({
-          'title': title,
-          'amount': amount
-        })
       }
     }
   }
 
+  let hideoutTranslations = {}
+  for (let i in hideout.stations) {
+    let name = hideout.stations[i].locales.en;
+    switch (name) {
+      case 'Intelligence center':
+        name = 'Intelligence Center'
+        break;
+      case 'Nutrition Unit':
+        name = 'Nutrition unit'
+        break;
+    }
+
+    hideoutTranslations[name] = hideout.stations[i].id
+  }
+
   for (let i in hideout.modules) {
+    let stationId = hideout.modules[i].stationId;
     let requires = hideout.modules[i].require;
     for (let j in requires) {
       let item = requires[j];
@@ -263,10 +308,19 @@ async function makeSynchronousRequestForCrafts(request) {
           hideoutItems[itemName] = []
         }
 
+        let completed = false;
+
+        let currentStationLevel = parseInt(progress.hideout[stationId]);
+        if (currentStationLevel >= level) {
+          completed = true;
+        }
+
         hideoutItems[itemName].push({
           'module': module,
+          'stationId': stationId,
           'level': level,
           'quantity': quantity,
+          'completed': completed
         })
       }
     }
@@ -276,7 +330,19 @@ async function makeSynchronousRequestForCrafts(request) {
   for (let i in crafts) {
     let rewardItems = crafts[i].rewardItems;
     let requiredItems = crafts[i].requiredItems;
+    let stationId = hideoutTranslations[crafts[i].source.split(' level ')[0]]
+    let craftLevel = parseInt(crafts[i].source.split(' level ')[1])
+    let available = false;
+
+    let currentStationLevel = parseInt(progress.hideout[stationId]);
+    if (currentStationLevel >= craftLevel) {
+      available = true;
+    }
+
     let craftItem = {};
+    craftItem.stationId = stationId;
+    craftItem.level = craftLevel;
+    craftItem.available = available;
     craftItem.output = {
       name: itemsDictionary[rewardItems[0].item.id].name,
       amount: rewardItems[0].count,
@@ -295,12 +361,63 @@ async function makeSynchronousRequestForCrafts(request) {
 
     craftItems.push(craftItem)
   }
-})();
+};
+// #endregion
 
+// #region ELECTRON
+app.on('ready', () => {
+  createWindow();
+  globalShortcut.register(toggle, showWindow)
 
+  // PRODUCTION
+  tray = new Tray(path.join(path.dirname(__dirname), 'app','public/images/icon.ico'))
+  // DEVELOPMENT
+  // tray = new Tray('public/images/icon.ico')
 
+  const contextMenu = Menu.buildFromTemplate([
+    { 
+      label: 'Show', click:  function() {
+        app.window.restore();
+      }
+    },
+    { 
+      label: 'Quit', click:  function() {
+        app.isQuiting = true;
+        app.quit();
+      }
+    }
+  ])
+  tray.setToolTip('Tarkov Search')
+  tray.setContextMenu(contextMenu)
 
-let tray = null;
+  if (conf.updated) {
+    dialog.showMessageBox(app.window, { title: 'TarkovHandbook', message: `TarkovHandbook has been updated! Your new folder is named "${path.join(__dirname, '/../..').replaceAll('\\', '/').split('/').pop()}", you can delete the old folder named "${conf.pastFolder.split('/').pop()}"` })
+  
+    delete conf.updated;
+    delete conf.pastFolder;
+  
+    fs.writeFileSync(confFileName, JSON.stringify(conf));
+  }
+
+  request('https://github.com/sammereye/TarkovHandbook/releases/tag/Latest', (e, r, body) => {
+    let $ = cheerio.load(body);
+
+    let githubVersion = parseInt($('.d-inline.mr-3').text().replaceAll('.', '').replaceAll('v', ''))
+
+    if (githubVersion > version) {
+      dialog.showMessageBox(app.window, {title: 'TarkovHandbook', message: `New update available, go to Settings to update to version ${githubVersion.toString().split('').join('.')}!`, type: 'info'})
+    }
+  })
+})
+
+app.on('browser-window-blur', () => {
+  app.window.webContents.send('reset')
+  app.window.minimize();
+});
+
+ipcMain.on('close', (e) => {
+  app.window.minimize();
+});
 
 function createWindow () {
   // Create the browser window.
@@ -316,7 +433,7 @@ function createWindow () {
     }
   })
 
-  win.minimize();
+  // win.minimize();
 
   app.window = win
 
@@ -332,77 +449,121 @@ function showWindow () {
     app.window.webContents.send('reset')
   }
 }
+// #endregion
 
-app.on('ready', () => {
-    createWindow();
-    globalShortcut.register(toggle, showWindow)
-    // PRODUCTION
-    tray = new Tray(path.join(path.dirname(__dirname), 'app','public/images/icon.ico'))
-    // DEVELOPMENT
-    // tray = new Tray('public/images/icon.ico')
-    const contextMenu = Menu.buildFromTemplate([
-      { 
-        label: 'Show', click:  function() {
-          app.window.restore();
-        }
-      },
-      { 
-        label: 'Quit', click:  function() {
-          app.isQuiting = true;
-          app.quit();
-        }
-      }
-    ])
-    tray.setToolTip('Tarkov Search')
-    tray.setContextMenu(contextMenu)
-})
+// #region UPDATE
+ipcMain.on('autoUpdate', (e) => {
+  request('https://github.com/sammereye/TarkovHandbook/releases/tag/Latest', (e, r, body) => {
+    let $ = cheerio.load(body);
 
-app.on('browser-window-blur', () => {
-  app.window.webContents.send('reset') 
-});
+    let githubVersion = parseInt($('.d-inline.mr-3').text().replaceAll('.', '').replaceAll('v', ''));
 
-ipcMain.on('close', (e) => {
-  app.window.minimize();
-});
+    if (githubVersion > version) {
+      app.window.webContents.send('startingUpdate')
+      request('https://github.com/sammereye/TarkovHandbook/releases/download/Latest/TarkovHandbook-latest.zip')
+      .pipe(fs.createWriteStream('update.zip'))
+      .on('close', async function () {
+        // PRODUCTION
+        let currentFolderName = path.join(__dirname, '/../..').split('\\').pop().split('-')[0];
+        // DEVELOPMENT
+        // let currentFolderName = __dirname.split('\\').pop().split('-')[0];
 
-ipcMain.on('getQuests', (e, options) => {
-  let filteredQuests = []
-  
-  if ('trader' in options) {
-    for (let i in quests) {
-      if (quests[i].giver == options.trader) {
-        filteredQuests.push(quests[i])
-      }
+        // PRODUCTION
+        await extract('update.zip', {dir: path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)});
+        // DEVELOPMENT
+        // await extract('update.zip', {dir: path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)})
+        fs.unlinkSync('update.zip');
+        
+        // Write current progess to new folder
+        // PRODUCTION
+        let newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'progress.json');
+        // DEVELOPMENT
+        // let newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'progress.json')
+        fs.writeFileSync(newProgressFilePath, JSON.stringify(progress));
+        
+        conf.updated = true;
+
+        // PRODUCTION
+        conf.pastFolder = path.join(__dirname, '/../..').replaceAll('\\', '/');
+        // DEVELOPMENT
+        // conf.pastFolder = __dirname.replaceAll('\\', '/');
+
+        // Write current config to new folder
+        // PRODUCTION
+        let newConfigFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'config.json');
+        // DEVELOPMENT
+        // let newConfigFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'config.json')
+        fs.writeFileSync(newConfigFilePath, JSON.stringify(conf));
+
+        // Start new process
+        // PRODUCTION
+        let exeFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook.exe');
+        // DEVELOPMENT
+        // let exeFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'TarkovHandbook.exe')
+        spawn(exeFilePath, [], {detached: true});
+        app.quit();
+      });
+    } else {
+      dialog.showMessageBox(app.window, {title: 'TarkovHandbook', message: `You are already up-to-date!`, type: 'info'});
     }
-  }
-
-  sortQuests(filteredQuests)
-
-  app.window.webContents.send('questResults', [filteredQuests, itemsDictionary]) 
+  });
 });
 
+ipcMain.on('manualUpdate', (e) => {
+  shell.openExternal("https://github.com/sammereye/TarkovHandbook/releases");
+});
+// #endregion
+
+// #region HIDEOUT
 ipcMain.on('getHideout', (e, data) => {
   if (data.id == 'crafts') {
     app.window.webContents.send('craftResults', craftItems) 
   } else if (data.id == 'stations')  {
-    app.window.webContents.send('stationResults', [hideout, itemsDictionary]) 
+    app.window.webContents.send('stationResults', [hideout, itemsDictionary, progress.hideout]) 
   }
 });
 
-ipcMain.on('getSettings', (e) => {
-  app.window.webContents.send('settingsResults', conf) 
+ipcMain.on('changeStationLevel', (e, options) => {
+  let stationId = options[0];
+  let newLevel = options[1];
+
+  progress.hideout[stationId] = newLevel;
+  fs.writeFile(progressFileName, JSON.stringify(progress), function writeJSON(err) {
+    if (err) return console.log(err);
+  });
+
+  for (let i in hideoutItems) {
+    for (let j in hideoutItems[i]) {
+      if (hideoutItems[i][j].stationId == stationId  && hideoutItems[i][j].level <= newLevel) {
+        hideoutItems[i][j].completed = true
+      } else if (hideoutItems[i][j].stationId == stationId  && hideoutItems[i][j].level > newLevel) {
+        hideoutItems[i][j].completed = false
+      }
+    }
+  }
+
+  for (let i in craftItems) {
+    if (craftItems[i].stationId == stationId  && craftItems[i].level <= newLevel) {
+      craftItems[i].available = true
+    } else if (craftItems[i].stationId == stationId  && craftItems[i].level > newLevel) {
+      craftItems[i].available = false
+    }
+  }
+
+  app.window.webContents.send('stationLevelResults', [itemsDictionary, newLevel, stationId])
+});
+// #endregion
+
+// #region SETTINGS
+ipcMain.on('getLevel', (e) => {
+  app.window.webContents.send('levelResults', progress.level) 
 });
 
-// ipcMain.on('settingHotkey', (e, state) => {
-//   if (state) {
-//     globalShortcut.unregister(shortcut);
-//   } else {
-//     globalShortcut.register(shortcut, showWindow);
-//   }
-// });
-
-ipcMain.on('logger', (e, log) => {
-  console.log(log)
+ipcMain.on('updateLevel', (e, level) => {
+  progress.level = level;
+  fs.writeFile(progressFileName, JSON.stringify(progress), function writeJSON(err) {
+    if (err) return console.log(err);
+  });
 });
 
 ipcMain.on('changeHotkey', (e, data) => {
@@ -425,6 +586,68 @@ ipcMain.on('changeHotkey', (e, data) => {
   }
 });
 
+ipcMain.on('getSettings', (e) => {
+  app.window.webContents.send('settingsResults', conf) 
+});
+
+ipcMain.on('resetData', (e, id) => {
+  switch(id)  {
+    case 'quests':
+      resetQuestItems();
+      progress.quests = [];
+      break;
+    case 'level':
+      progress.level = 1;
+      break;
+    case 'hideout':
+      resetHideoutItems();
+      progress.hideout = { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 1, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0 }
+      break;
+    case 'all':
+      resetQuestItems();
+      progress.quests = [];
+      progress.level = 1;
+      resetHideoutItems();
+      progress.hideout = { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 1, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0 }
+      break;
+  }
+
+  fs.writeFile(progressFileName, JSON.stringify(progress), function writeJSON(err) {
+    if (err) return console.log(err);
+    console.log('reset data')
+  });
+});
+
+ipcMain.on('changeConfig', (e, data) => {
+  conf[data.id] = data.value;
+  fs.writeFile(confFileName, JSON.stringify(conf), function writeJSON(err) {
+    if (err) return console.log(err);
+    console.log('changed hotkey')
+  });
+});
+
+function resetQuestItems() {
+  for (let i in questItems) {
+    for (let j in questItems[i]) {
+      questItems[i][j].completed = false;
+    }
+  }
+}
+
+function resetHideoutItems() {
+  for (let i in hideoutItems) {
+    for (let j in hideoutItems[i]) {
+      hideoutItems[i][j].completed = false
+    }
+  }
+
+  for (let i in craftItems) {
+    craftItems[i].available = false
+  }
+}
+// #endregion
+
+// #region ITEMS
 ipcMain.on('itemSearch', (e, val) => {
   let results = db.search(val)
   condensedResults = results.slice(0, 4);
@@ -440,14 +663,51 @@ ipcMain.on('itemSearch', (e, val) => {
 
   app.window.webContents.send('itemResults', condensedResults)  
 });
+// #endregion
+
+// #region QUESTS
+ipcMain.on('getQuests', (e, options) => {
+  getQuests(quests, options)
+});
+
+ipcMain.on('forwardQuest', (e, options) => {
+  let questId = options.id;
+  let traderId = options.traderId;
+
+  iterateThroughQuest(questId);
+  questPathList.shift();
+  
+  for (let i in questPathList) {
+    progress.quests.push(questPathList[i])
+
+    for (let i in questItems) {
+      for (let j in questItems[i]) {
+        if (questPathList[i] == questItems[i][j].quest_id) {
+          questItems[i][j].completed = true;
+        }
+      }
+    }
+  }
+
+  fs.writeFile(progressFileName, JSON.stringify(progress), function writeJSON(err) {
+    if (err) return console.log(err);
+  });
+
+  if ('traderId' in options) {
+    getQuests(quests, {'trader': options.traderId})
+  } else {
+    app.window.webContents.send('updateIndividualQuest', {id: options.id, type: 'forwarded'}) 
+  }
+
+  questPathList = [];
+});
 
 ipcMain.on('questSearch', (e, val) => {
   let results = questDB.search(val)
   condensedResults = results.slice(0, 4)
-  sortQuests(condensedResults)
-  app.window.webContents.send('questResults', [condensedResults, itemsDictionary])  
-});
 
+  getQuests(condensedResults, {})
+});
 
 ipcMain.on('getWiki', (e, url) => {
   request({
@@ -482,7 +742,7 @@ ipcMain.on('getWiki', (e, url) => {
           let images = []
           for (let j in $(guide[i]).find('a')) {
             if ($(guide[i]).find('a')[j].name == 'a') {
-              images.push($(guide[i]).find('a')[j].attribs.href.replace('latest', 'latest/scale-to-width-down/300'))
+              images.push($(guide[i]).find('a')[j].attribs.href.replace('latest', 'latest/scale-to-width-down/700'))
             }
           }
 
@@ -516,26 +776,6 @@ ipcMain.on('getWiki', (e, url) => {
                   row[k] = row[k].replace(/\s+/g, " ").replaceAll(' ', '<br>')
                 }
 
-                // if (k == 2) {
-                //   let levels = [];
-                //   row[k] = row[k].replace(/\s+/g, " ");
-                //   let levelsSplit = row[k].split(' ');
-                  
-                //   let text = '';
-                //   for (let l in levelsSplit) {
-                //     if (text == '') {
-                //       text = levelsSplit[l]
-                //     } else if (levelsSplit[l].includes('LL')) {
-                //       levels.push(text);
-                //       text = levelsSplit[l]
-                //     } else {
-                //       text += ` ${levelsSplit[l]}`
-                //     }
-                //   }
-                //   levels.push(text);
-                //   row[k] = levels.join('<br>')
-                // }
-
                 paragraph += `<td>${row[k]}</td>`
               }
               paragraph += '</tr>'
@@ -552,7 +792,116 @@ ipcMain.on('getWiki', (e, url) => {
   });
 });
 
+ipcMain.on('toggleQuest', (e, options) => {
+  let type = '';
+  if (progress.quests.includes(options.id)) {
+    progress.quests.splice(progress.quests.indexOf(options.id), 1)
 
+    for (let i in questItems) {
+      for (let j in questItems[i]) {
+        if (options.id == questItems[i][j].quest_id) {
+          questItems[i][j].completed = false;
+          type = 'removed'
+        }
+      }
+    }
+  } else {
+    progress.quests.push(options.id)
+
+    for (let i in questItems) {
+      for (let j in questItems[i]) {
+        if (options.id == questItems[i][j].quest_id) {
+          questItems[i][j].completed = true;
+          type = 'completed'
+        }
+      }
+    }
+  }
+
+  if ('traderId' in options) {
+    getQuests(quests, {'trader': options.traderId})
+  } else {
+    app.window.webContents.send('updateIndividualQuest', {id: options.id, type: type}) 
+  }
+
+  fs.writeFile(progressFileName, JSON.stringify(progress), function writeJSON(err) {
+    if (err) return console.log(err);
+  });
+});
+
+function getQuests(quests, options) {
+  let completedQuests = [];
+  let uncompletedQuests = [];
+  let unavailableQuests = [];
+  
+  for (let i in quests) {
+    if (progress.level >= quests[i].require.level || conf.showAllQuests) {
+      let meetsRequirements = true;
+
+      for (let j in quests[i].require.quests) {
+        if (!(progress.quests.includes(quests[i].require.quests[j]))) {
+          meetsRequirements = false;
+        }
+      }
+
+      let traderValid = true;
+      if ('trader' in options) {
+        if (quests[i].giver != options.trader) {
+          traderValid = false
+        }
+      }
+
+      if (meetsRequirements) {
+        if (progress.quests.includes(quests[i].id)) {
+          quests[i].completed = true;
+          quests[i].unlocked = true;
+
+          if (traderValid) {
+            completedQuests.push(quests[i])
+          }
+          
+        } else {
+          quests[i].completed = false;
+          quests[i].unlocked = true;
+
+          if (traderValid) {
+            uncompletedQuests.push(quests[i])
+          }
+        }
+      } else {
+        quests[i].completed = false;
+        quests[i].unlocked = false;
+
+        if (traderValid) {
+          unavailableQuests.push(quests[i])
+        }
+      }
+    }
+  }
+  
+  sortQuests(completedQuests)
+  sortQuests(uncompletedQuests)
+  sortQuests(unavailableQuests)
+
+  let filteredQuests = uncompletedQuests.concat(completedQuests).concat(unavailableQuests)
+
+  app.window.webContents.send('questResults', [filteredQuests, itemsDictionary]) 
+}
+
+function iterateThroughQuest(id) {
+  questPathList.push(id);
+
+  if (id in questPath) {
+    if (questPath[id].length > 0) {
+      for (let i in questPath[id]) {
+        iterateThroughQuest(questPath[id][i])
+      }
+    }
+  }
+}
+// #endregion
+
+// #region FUNCTIONS
 const sortQuests = (arr = []) => {
   const assignValue = val => {
      if(val === null){
@@ -567,3 +916,4 @@ const sortQuests = (arr = []) => {
   };
   arr.sort(sorter);
 }
+// #endregion

@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Factory | Escape From Tarkov Interactive Map | Map Genie</title>
+
+<meta charset="utf-8">
+<meta name="description" content="Interactive Maps for Escape From Tarkov. Custom tactical maps with all exits, loot, keys &amp; weapon spawns marked out.">
+<meta name="keyword" content="Escape From Tarkov Map, Tarkov Exit Map, Tarkov Customs Map, EFT Map, EFT Loot Map, Tarkov Loot Map, Tarkov Woods Map, EFT Shoreline Map, EFT Interchange Map">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+    <meta property="og:url" content="https://mapgenie.io/tarkov/maps/factory"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Factory | Escape From Tarkov Interactive Map | Map Genie"/>
+<meta property="og:description" content="Interactive Maps for Escape From Tarkov. Custom tactical maps with all exits, loot, keys &amp; weapon spawns marked out."/>
+<meta property="og:image" content="https://cdn.mapgenie.io/images/games/tarkov/preview.jpg"/>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/tarkov/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/tarkov/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons/tarkov/favicon-16x16.png">
+<link rel="manifest" href="/favicons/tarkov/site.webmanifest">
+    <link rel="mask-icon" href="/favicons/tarkov/safari-pinned-tab.svg" color="#5e3760">
+<meta name="msapplication-TileColor" content="#1e4964">
+<meta name="theme-color" content="#1e4964">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="uk82GnhKSGORaPoZ6ndJbRJeGbEj9LN44pAXe2I3">
+            <meta name="auth-token" content="14f7a08e-b0d5-4fca-afc8-507d2a30e9cb">
+        <meta name="base-url" content="https://mapgenie.io">
+
+    <link href="https://cdn.mapgenie.io/css/app.css?id=dad8a7946ee4e1c59478" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://cdn.mapgenie.io/css/vendor/ionicons@4.2.6.min.css" rel="stylesheet">
+
+                                        <link href="https://cdn.mapgenie.io/css/themes/base-theme.css?id=821db9d3d657001ecc59" rel="stylesheet">
+                        <link href="https://cdn.mapgenie.io/css/themes/tarkov.css?id=718ff50c2e8abe1bcc20" rel="stylesheet">
+            
+    <style>
+        
+        .guide .location-link:after {
+            content: "\f31c";
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon:before {
+            content: '\f273';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon:before {
+            content: '\f368';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-fullscreen .mapboxgl-ctrl-icon:before {
+            content: '\f2e7';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-shrink .mapboxgl-ctrl-icon:before {
+            content: '\f2d8';
+        }
+    </style>
+
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css"/>
+
+            <script src='https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css' rel='stylesheet'/>
+
+                    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
+            <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css' type='text/css'/>
+            
+
+            <script>
+const MARKER_IMAGES = {960:0,971:88,948:176,941:264,959:352,969:440,1017:528,942:616,961:704,947:792,946:880,943:968,945:1056,949:1144,968:1232,1016:1320,944:1408,970:1496,1013:1584,958:1672,1015:1760,951:1848,950:1936,1011:2024,1012:2112,1019:2200,1014:2288,954:2376,952:2464,957:2552,956:2640,1018:2728,955:2816,953:2904,972:2992,};
+const MARKER_IMAGES_HEIGHT = 3080;
+const MARKER_IMAGES_URL = '/images/games/tarkov/markers.png?MTYxODA2';
+const MARKER_IMAGES_URL_FOUND = '/images/games/tarkov/markers-faded.png?MTYxODA2';
+</script>    
+    <style>
+        .gmnoprint:not(.gm-bundled-control):not([role="menubar"]):not([data-control-width="40"]) {
+            display: none;
+        }
+    </style>
+
+            <style>
+            #blobby-left {
+                display: none;
+            }
+
+            #categories, #search-results-wrapper {
+                padding-bottom: 0 !important;
+            }
+        </style>
+    
+    
+    
+
+
+            
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127471676-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+
+          window.gtag = gtag;
+
+          gtag('js', new Date());
+          gtag('set', 'auth_status', 'logged_in');
+                    gtag('set', 'user_type', 'pro');
+                    gtag('config', 'UA-127471676-1', {
+            custom_map: {'dimension1': 'user_type', 'dimension2': 'auth_status'},
+            // Required for analytics to work in embeds
+            cookie_flags: 'max-age=63072000;secure;samesite=none'
+          });
+          gtag('config', 'AW-658861064');
+        </script>
+    
+</head>
+
+<body class=" map map-68  pro Light">
+<div id="app">
+    
+
+    
+
+
+<!-- Mobile Header -->
+<nav style="display: none;" id="header" class="navbar navbar-light fixed-top">
+            <a href="https://mapgenie.io/tarkov">
+            <div class="navbar-logo" href="#"><img src="https://cdn.mapgenie.io/images/games/tarkov/logo-small.png" height="36" alt="Escape From Tarkov Map"></div>
+        </a>
+        <div class="flex-fill"></div>
+
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-maps" data-parent="#header" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle maps navigation">
+            <span class="navbar-toggler-categories navbar-toggler-maps">Maps</span>
+        </button>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse" data-parent="#header" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle category navigation">
+            <span class="navbar-toggler-icon navbar-toggler-categories"></span>
+        </button>
+    
+    <button id="navbar-toggler-user" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-user" data-parent="#header" aria-controls="navbar-collapse-user" aria-expanded="false" aria-label="Toggle user navigation"
+            data-placement="bottom" title="Login to track your progress and add personal locations">
+        <span class="navbar-toggler-icon navbar-toggler-user"></span>
+    </button>
+
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-search" data-parent="#header" aria-controls="navbar-collapse-search" aria-expanded="false" aria-label="Toggle search navigation">
+        <span class="navbar-toggler-icon navbar-toggler-search"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-search"></div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-user"></div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse"></div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-maps">
+            <div class="map-switcher-panel">
+                                                                                        <a class="map-link selected" href="https://mapgenie.io/tarkov/maps/factory">Factory</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/woods">Woods</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/customs">Customs</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/interchange">Interchange</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/reserve">Reserve[WIP]</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/shoreline">Shoreline</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/lab">The Lab</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/lighthouse">Lighthouse[WIP]</a>
+                                                                        </div>
+                            <div id="map-info-table">
+                    <div class="info-item"><i class="map-info-icon icon ion-md-time"></i>20 mins (Day), 25 mins (Night)</div>
+                    <div class="info-item"><i class="map-info-icon icon ion-md-person"></i>4-5  (Day), 4-6 (Night)</div>
+                </div>
+                    </div>
+    </nav>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Left Sidebar -->
+<div id="left-sidebar" class="sidebar hidden-sm-down">
+    <div class="sidebar-close">
+        <div class="left-arrow"></div>
+    </div>
+
+    <div class="panel">
+                    <a href="https://mapgenie.io/tarkov" class="no-style sidebar-logo-link">
+                <img id="logo-sidebar" src="https://cdn.mapgenie.io/images/games/tarkov/logo-512.png"/>
+            </a>
+            <h2 class="subtitle">Escape From Tarkov Interactive Map</h2>
+        
+                    <p class="text-center mb-3 wip-heading"><b>0.12.12 Update:</b> Lighthouse available for PRO users! Smooth Zoom + Preset Filters added!</p>
+        
+        <div class="social">
+                            <a class="map-genie-logo" href="https://mapgenie.io" target="_blank">
+                    <svg width="72" height="10" viewBox="0 0 782 108" xmlns="http://www.w3.org/2000/svg" style="fill:#FFF">
+                        <path d="M92.96 105l.576-72.144h-.432L66.608 105h-17.28L23.552 32.856h-.432L23.696 105H.512V3.048h34.992l23.184 65.376h.576L81.44 3.048h35.568V105H92.96zm114.192 0l-7.92-20.016h-39.456L152.288 105h-26.784L168.272 3.048h23.904L234.512 105h-27.36zm-27.36-74.736l-12.96 34.992h25.632l-12.672-34.992zm140.544 4.176c0 5.952-1.104 10.968-3.312 15.048-2.208 4.08-5.184 7.368-8.928 9.864-3.744 2.496-8.064 4.32-12.96 5.472-4.896 1.152-9.984 1.728-15.264 1.728h-12.24V105h-24.624V3.048h37.44c5.568 0 10.776.552 15.624 1.656 4.848 1.104 9.072 2.88 12.672 5.328 3.6 2.448 6.432 5.664 8.496 9.648s3.096 8.904 3.096 14.76zm-24.624.144c0-2.4-.48-4.368-1.44-5.904-.96-1.536-2.256-2.736-3.888-3.6-1.632-.864-3.48-1.44-5.544-1.728a46.336 46.336 0 00-6.408-.432h-10.8v24.048H278c2.304 0 4.512-.192 6.624-.576 2.112-.384 4.008-1.056 5.688-2.016 1.68-.96 3-2.232 3.96-3.816.96-1.584 1.44-3.576 1.44-5.976zM451.52 21.336c-3.552-3.744-7.776-6.648-12.672-8.712-4.896-2.064-10.512-3.096-16.848-3.096-6.528 0-12.408 1.2-17.64 3.6-5.232 2.4-9.672 5.64-13.32 9.72-3.648 4.08-6.456 8.808-8.424 14.184-1.968 5.376-2.952 11.04-2.952 16.992 0 5.952.984 11.616 2.952 16.992 1.968 5.376 4.776 10.08 8.424 14.112 3.648 4.032 8.088 7.248 13.32 9.648 5.232 2.4 11.112 3.6 17.64 3.6 5.76 0 11.04-.624 15.84-1.872 4.8-1.248 8.688-2.832 11.664-4.752v-30.96h-23.76V51.72h34.128v45.936c-5.568 3.36-11.568 5.856-18 7.488-6.432 1.632-13.104 2.448-20.016 2.448-7.68 0-14.784-1.344-21.312-4.032-6.528-2.688-12.144-6.408-16.848-11.16-4.704-4.752-8.376-10.392-11.016-16.92-2.64-6.528-3.96-13.68-3.96-21.456s1.344-14.928 4.032-21.456c2.688-6.528 6.408-12.168 11.16-16.92 4.752-4.752 10.368-8.472 16.848-11.16C407.24 1.8 414.272.456 421.856.456c8.16 0 15.264 1.2 21.312 3.6 6.048 2.4 11.232 5.76 15.552 10.08l-7.2 7.2zm45.216 74.448h54.576V105h-64.944V3.048h63.216v9.216h-52.848V47.4h49.392v9.072h-49.392v39.312zm147.168-5.904h.288V3.048h10.368V105H641.6l-59.328-87.696h-.288V105h-10.368V3.048h12.96l59.328 86.832zM692 105h-10.368V3.048H692V105zm37.44-9.216h54.576V105h-64.944V3.048h63.216v9.216H729.44V47.4h49.392v9.072H729.44v39.312z"/>
+                    </svg>
+                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Ffactory" target="_blank" title="Facebook" class="social-item social-facebook">
+                    <svg style="display:block;fill:#fff;height:44%;margin:28% auto;" viewBox="0 -256 864 1664">
+                        <path transform="matrix(1,0,0,-1,-95,1280)" d="M 959,1524 V 1260 H 802 q -86,0 -116,-36 -30,-36 -30,-108 V 927 H 949 L 910,631 H 656 V -128 H 350 V 631 H 95 v 296 h 255 v 218 q 0,186 104,288.5 104,102.5 277,102.5 147,0 228,-12 z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/share?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Ffactory&text=Escape+From+Tarkov+interactive+map+by+%40MapGenie+%23EscapeFromTarkov+%23EFT" target="_blank" title="Twitter" class="social-item social-twitter">
+                    <svg style="display:block;fill:#fff;height:36%;margin:32% auto;" viewBox="0 -256 1576 1280">
+                        <path transform="matrix(1,0,0,-1,-44,1024)"
+                              d="m 1620,1128 q -67,-98 -162,-167 1,-14 1,-42 0,-130 -38,-259.5 Q 1383,530 1305.5,411 1228,292 1121,200.5 1014,109 863,54.5 712,0 540,0 269,0 44,145 q 35,-4 78,-4 225,0 401,138 -105,2 -188,64.5 -83,62.5 -114,159.5 33,-5 61,-5 43,0 85,11 Q 255,532 181.5,620.5 108,709 108,826 v 4 q 68,-38 146,-41 -66,44 -105,115 -39,71 -39,154 0,88 44,163 Q 275,1072 448.5,982.5 622,893 820,883 q -8,38 -8,74 0,134 94.5,228.5 94.5,94.5 228.5,94.5 140,0 236,-102 109,21 205,78 -37,-115 -142,-178 93,10 186,50 z"/>
+                    </svg>
+                </a>
+                <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Ffactory&title=Escape+From+Tarkov+Interactive+Map+%7C+Map+Genie" target="_blank" title="Reddit" class="social-item social-reddit">
+                    <svg style="display:block;fill:#fff;height:46%;margin:26% auto;" viewBox="0 -256 1792 1692">
+                        <path transform="matrix(1,0,0,-1,0,1280)"
+                              d="m 1792,690 q 0,-58 -29,-105.5 -30,-47.5 -80,-72.5 12,-46 12,-96 0,-155 -106,-287 Q 1482,-3 1298,-79.5 1114,-156 898,-156 682,-156 498.5,-79.5 315,-3 208.5,129 102,261 102,416 q 0,47 11,94 Q 62,535 31,583.5 0,632 0,690 q 0,82 58,140.5 58,58.5 141,58.5 85,0 145,-63 218,152 515,162 l 116,521 q 3,13 15,21 12,8 26,5 l 369,-81 q 18,37 54,60 36,22 79,22 62,0 106,-43 44,-44 44,-106 0,-62 -44,-106 -44,-44 -106,-44 -62,0 -105,44 -44,43 -44,105 l -334,74 -104,-472 q 300,-9 519,-160 58,61 143,61 83,0 141,-58.5 58,-58.5 58,-140.5 z M 418,491 q 0,-62 43.5,-106 43.5,-44 105.5,-44 62,0 106,44 44,44 44,106 0,62 -44,105.5 Q 629,640 567,640 506,640 462,596 418,552 418,491 z m 810,-355 q 11,11 11,26 0,15 -11,26 -10,10 -25,10 -15,0 -26,-10 -41,-42 -121,-62 -80,-20 -160,-20 -80,0 -160,20 -80,20 -121,62 -11,10 -26,10 -15,0 -25,-10 Q 553,178 553,162.5 553,147 564,136 607,93 682.5,68 758,43 805,38.5 852,34 896,34 q 44,0 91,4.5 47,4.5 123,29.5 75,25 118,68 z m -3,205 q 62,0 106,44 43,44 43,106 0,61 -44,105 -44,44 -105,44 -62,0 -106,-43.5 -44,-43.5 -44,-105.5 0,-62 44,-106 44,-44 106,-44 z"/>
+                    </svg>
+                </a>
+                <a href="whatsapp://send?text=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Ffactory" title="WhatsApp" class="social-item social-whatsapp">
+                    <svg style="display:block;fill:#fff;height:44%;margin:28% auto;" viewBox="0 -256 1536 1548">
+                        <path transform="matrix(1,0,0,-1,0,1158)"
+                              d="m 985,562 q 13,0 98,-44 84,-44 89,-53 2,-5 2,-15 0,-33 -17,-76 -16,-39 -71,-65.5 -55,-26.5 -102,-26.5 -57,0 -190,62 -98,45 -170,118 -72,73 -148,185 -72,107 -71,194 v 8 q 3,91 74,158 24,22 52,22 6,0 18,-1 12,-2 19,-2 19,0 26.5,-6 7.5,-7 15.5,-28 8,-20 33,-88 25,-68 25,-75 0,-21 -34.5,-57.5 Q 599,735 599,725 q 0,-7 5,-15 34,-73 102,-137 56,-53 151,-101 12,-7 22,-7 15,0 54,48.5 39,48.5 52,48.5 z M 782,32 q 127,0 244,50 116,50 200,134 84,84 134,200.5 50,116.5 50,243.5 0,127 -50,243.5 -50,116.5 -134,200.5 -84,84 -200,134 -117,50 -244,50 -127,0 -243.5,-50 Q 422,1188 338,1104 254,1020 204,903.5 154,787 154,660 154,457 274,292 L 195,59 437,136 Q 595,32 782,32 z m 0,1382 q 153,0 293,-60 139,-60 240,-161 101,-101 161,-240.5 Q 1536,813 1536,660 1536,507 1476,367.5 1416,228 1315,127 1214,26 1075,-34 935,-94 782,-94 587,-94 417,0 L 0,-134 136,271 Q 28,449 28,660 q 0,153 60,292.5 60,139.5 161,240.5 101,101 240.5,161 139.5,60 292.5,60 z"/>
+                    </svg>
+                </a>
+                <a href="https://vk.com/share.php?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Ffactory" target="_blank" title="VK" class="social-item social-vk">
+                    <svg style="display:block;fill:#fff;height:32%;margin:34% auto;" viewBox="-1 -256 1921 1096">
+                        <path transform="matrix(1,0,0,-1,0,839.1)"
+                              d="m 1917,1016 q 23,-64 -150,-294 -24,-32 -65,-85 -40,-51 -55,-72 -15,-21 -30,-49.5 -16,-28.5 -12,-42 3,-13.5 13,-34.5 9,-21 32,-43 23,-22 57,-53 4,-2 5,-4 141,-131 191,-221 3,-5 7,-12.5 3,-7.5 7,-26.5 3,-19 -1,-34 -4,-15 -25,-27.5 Q 1870,5 1832,5 L 1576,1 q -24,-5 -56,5 -32,10 -52,22 l -20,12 q -30,21 -70,64 -40,43 -68,77.5 -29,34.5 -61,58 -33,23.5 -57,15.5 -3,-1 -8,-3.5 -5,-2.5 -17,-14.5 -12,-12 -21,-29.5 -10,-17.5 -17,-52 -8,-34.5 -7,-77.5 0,-15 -3,-27.5 -4,-12.5 -8,-18.5 l -4,-5 Q 1089,8 1054,5 H 939 Q 868,1 793,21.5 718,42 661.5,74.5 605,107 558.5,140.5 512,174 488,198 l -25,24 Q 453,232 435.5,252 418,272 364,343 310,414 258,494 206,574 135.5,705 65,836 5,977 q -6,16 -6,27 0,11 3,16 l 4,6 q 15,19 57,19 l 274,2 q 12,-2 23,-6 11,-5 16,-9 l 5,-3 q 16,-11 24,-32 20,-50 46,-103.5 26,-53.5 41,-81.5 l 16,-29 q 29,-60 56,-104 27,-44 48.5,-68.5 Q 634,586 654,572 q 20,-14 34,-14 14,0 27,5 2,1 5,5 3,4 12,22 9,18 13.5,47 4.5,29 9.5,81 5,52 0,125 -2,40 -9,73 -7,33 -14,46 l -6,12 q -25,34 -85,43 -13,2 5,24 16,19 38,30 53,26 239,24 82,-1 135,-13 20,-5 34,-13 13,-9 20,-24 7,-16 11,-32 3,-17 3,-46 0,-29 -1,-55 -1,-26 -2,-70.5 -2,-44.5 -2,-82.5 0,-11 -1,-42 -1,-31 0,-48 0,-17 3,-40.5 3,-23.5 12,-39 8,-15.5 22,-24.5 8,-2 17,-4 9,-2 26,11 17,13 38,34.5 21,21.5 52,67 31,45.5 68,107.5 60,104 107,225 4,10 10,18 6,7 11,10 l 4,3 5,3 q 0,0 13,3 13,3 20,0 l 288,2 q 39,5 64,-2 25,-8 31,-17 z"/>
+                    </svg>
+                </a>
+            
+            
+            
+            
+            
+            
+
+
+                    </div>
+
+
+        
+        
+                            <hr/>
+                <div class="tools-panel">
+                    <a class="tool" href="https://mapgenie.io/tarkov/guides/keys-14" target="_blank">Key Tool</a>
+                    <a class="tool" href="https://mapgenie.io/tarkov/guides/quests-17" target="_blank">Quest Tool</a>
+                </div>
+                        <hr/>
+
+            <div class="map-switcher-panel">
+                                                                                        <a class="map-link selected" href="https://mapgenie.io/tarkov/maps/factory">Factory</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/woods">Woods</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/customs">Customs</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/interchange">Interchange</a>
+                                                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/reserve">Reserve[WIP]</a>
+                                                                                                                                                                <a class="map-link " href="https://mapgenie.io/tarkov/maps/shoreline">Shoreline</a>
+                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/lab">The Lab</a>
+                                                                                                                                                                    <a class="map-link " href="https://mapgenie.io/tarkov/maps/lighthouse">Lighthouse[WIP]</a>
+                                                                                                    </div>
+                            <hr/>
+                <div id="map-info-table">
+                    <div class="info-item"><i class="map-info-icon icon ion-md-time"></i>20 mins (Day), 25 mins (Night)</div>
+                    <div class="info-item"><i class="map-info-icon icon ion-md-person"></i>4-5  (Day), 4-6 (Night)</div>
+                </div>
+                            <hr/>
+        
+        <div id="left-sidebar-buttons-container">
+            <div class="button-panel" id="left-sidebar-buttons">
+                
+                
+                
+
+                <span id="tutorial-button">?</span>
+                <span id="show-all">Show All</span>
+                <span id="hide-all">Hide All</span>
+                
+                            </div>
+        </div>
+        <hr/>
+
+        
+        
+        <div id="sidebar-categories-wrapper">
+
+            <div id="left-sidebar-search-container">
+                <div id="search-wrapper">
+                    <div id="search-input-wrapper" class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button id="search-close" class="btn btn-outline-secondary d-none" type="button">X</button>
+                        </div>
+
+                        <input id="search-input" type="text" class="form-control" placeholder='Search... ' autocomplete="off">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+
+                    <div id="search-results-wrapper" class="not-shown"></div>
+                </div>
+            </div>
+
+            <div id="categories-wrapper">
+                <ul id="categories">
+                                            <div class="header">Loot</div>
+
+
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-armor"></span>
+                                <span class="title">Armor</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-crate"></span>
+                                <span class="title">Crate</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-dead_scav"></span>
+                                <span class="title">Dead SCAV</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-duffle_bag"></span>
+                                <span class="title">Duffle Bag</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-filing_cabinet"></span>
+                                <span class="title">Filing Cabinet</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-clothes"></span>
+                                <span class="title">Jacket</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-key"></span>
+                                <span class="title">Key</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-loose_loot"></span>
+                                <span class="title">Loose Loot</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-meds"></span>
+                                <span class="title">Meds</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-other_loot"></span>
+                                <span class="title">Other Loot</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-safe"></span>
+                                <span class="title">Safe</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-toolbox"></span>
+                                <span class="title">Toolbox</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-weapon_box"></span>
+                                <span class="title">Weapon Box</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-weapon_mods"></span>
+                                <span class="title">Weapon Mods</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                                    <div class="header">Enemies</div>
+
+
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-boss"></span>
+                                <span class="title">Boss</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                                    <div class="header">Locations</div>
+
+
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-exit"></span>
+                                <span class="title">Extraction</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-location"></span>
+                                <span class="title">Location</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-locked_door"></span>
+                                <span class="title">Locked Door</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-miscellaneous"></span>
+                                <span class="title">Miscellaneous</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-quest_item"></span>
+                                <span class="title">Quest Item</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                    
+                            <div class="category-item category-visible">
+                                <span class="icon icon-spawn_point"></span>
+                                <span class="title">Spawn Point</span>
+                                <span class="bubble">0</span>
+                            </div>
+                                                            </ul>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="blobby-left" class="text-center newor">
+        <div id="blobby-left-inner">
+
+
+            
+        </div>
+        <div class="text-center mb-1 mt-1">
+            Ad Blocker? Consider an <b>upgrade to PRO</b> to remove ads and get extra features.
+        </div>
+        <a href=https://mapgenie.io/tarkov/upgrade target="_blank">
+            <button id="button-upgrade" class="btn btn-outline-secondary btn-upgrade">
+                Upgrade To Pro
+            </button>
+        </a>
+    </div>
+</div>
+
+
+<!-- Right Sidebar -->
+<div id="right-sidebar" class="sidebar hidden-sm-down">
+    <div class="sidebar-close">
+        <div class="right-arrow"></div>
+    </div>
+
+    <div id="user-panel-wrapper">
+
+    </div>
+</div>
+
+<div id="dialogs"></div>
+
+<div id='admin-app'></div>
+
+<div id="editor-controls-overlay"></div>
+
+<div id="multi-location-modal"></div>
+
+<div id="quick-jump-modal">
+    <div id="quick-jump-content">
+        <span id="quick-jump-icon"></span>
+        <input id="quick-jump-input" class="autocomplete" autocomplete="off">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="marker-tooltip">
+    <div id="marker-tooltip-title"></div>
+</div>
+
+<div id="map-context-menu"></div>
+
+<div id="region-filter-notification" class="tool-info-panel center-top">
+    <div><small>Filter Active</small></div>
+    <div id="region-filter-region-title" class="tool-info-title">region_name</div>
+</div>
+
+<div id="distance-info-panel" class="tool-info-panel">
+    <div class="tool-info-title">Distance Measurement Tool</div>
+    <div id="distance-info" class="tool-info"></div>
+</div>
+
+<div id="radius-info-panel" class="tool-info-panel">
+    <div class="tool-info-title">Sniping Radius Tool</div>
+    <div id="radius-info" class="tool-info">Drag the target shape to visualize sniping distances. Dotted lines are 50m increments.</div>
+    <button id="radius-clear-button" class="btn btn-link tool-info">Clear Target</button>
+</div>
+
+<!-- Embedded -->
+    <div id="blobby-overlay"></div>
+
+    
+
+
+
+
+
+
+
+
+
+        <script>window.mapUrl = "https:\/\/mapgenie.io\/tarkov\/maps\/factory";window.baseUrl = "https:\/\/mapgenie.io\/tarkov";window.cdnUrl = "https:\/\/cdn.mapgenie.io";window.tilesCdnUrl = "https:\/\/tiles.mapgenie.io";window.storageCdnUrl = "https:\/\/storage-cdn.mapgenie.io";window.user = {"id":973471,"role":"user","locations":[],"gameLocationsCount":0,"hasPro":true,"trackedCategoryIds":[],"suggestions":[],"presets":[]};window.mapData = {"map":{"id":68,"title":"Factory"},"groups":[{"id":200,"game_id":20,"title":"Loot","order":10,"color":"386150","categories":[{"id":971,"group_id":200,"title":"Armor","icon":"armor","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":941,"group_id":200,"title":"Crate","icon":"crate","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":959,"group_id":200,"title":"Dead SCAV","icon":"dead_scav","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":969,"group_id":200,"title":"Duffle Bag","icon":"duffle_bag","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":1017,"group_id":200,"title":"Filing Cabinet","icon":"filing_cabinet","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":961,"group_id":200,"title":"Jacket","icon":"clothes","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":947,"group_id":200,"title":"Key","icon":"key","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":946,"group_id":200,"title":"Loose Loot","icon":"loose_loot","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":943,"group_id":200,"title":"Meds","icon":"meds","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":949,"group_id":200,"title":"Other Loot","icon":"other_loot","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":944,"group_id":200,"title":"Safe","icon":"safe","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":970,"group_id":200,"title":"Toolbox","icon":"toolbox","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":958,"group_id":200,"title":"Weapon Box","icon":"weapon_box","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":1015,"group_id":200,"title":"Weapon Mods","icon":"weapon_mods","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false}]},{"id":201,"game_id":20,"title":"Enemies","order":10,"color":"9c3443","categories":[{"id":951,"group_id":201,"title":"Boss","icon":"boss","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false}]},{"id":202,"game_id":20,"title":"Locations","order":10,"color":"453A49","categories":[{"id":954,"group_id":202,"title":"Extraction","icon":"exit","info":null,"template":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":952,"group_id":202,"title":"Location","icon":"location","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":957,"group_id":202,"title":"Locked Door","icon":"locked_door","info":null,"template":"**Key:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":956,"group_id":202,"title":"Miscellaneous","icon":"miscellaneous","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":955,"group_id":202,"title":"Quest Item","icon":"quest_item","info":null,"template":"**Quest:** ??  \n**Quest Giver:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},{"id":953,"group_id":202,"title":"Spawn Point","icon":"spawn_point","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false}]}],"categories":{"971":{"id":971,"group_id":200,"title":"Armor","icon":"armor","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"941":{"id":941,"group_id":200,"title":"Crate","icon":"crate","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"959":{"id":959,"group_id":200,"title":"Dead SCAV","icon":"dead_scav","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"969":{"id":969,"group_id":200,"title":"Duffle Bag","icon":"duffle_bag","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"1017":{"id":1017,"group_id":200,"title":"Filing Cabinet","icon":"filing_cabinet","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"961":{"id":961,"group_id":200,"title":"Jacket","icon":"clothes","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"947":{"id":947,"group_id":200,"title":"Key","icon":"key","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"946":{"id":946,"group_id":200,"title":"Loose Loot","icon":"loose_loot","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"943":{"id":943,"group_id":200,"title":"Meds","icon":"meds","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"949":{"id":949,"group_id":200,"title":"Other Loot","icon":"other_loot","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"944":{"id":944,"group_id":200,"title":"Safe","icon":"safe","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"970":{"id":970,"group_id":200,"title":"Toolbox","icon":"toolbox","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"958":{"id":958,"group_id":200,"title":"Weapon Box","icon":"weapon_box","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"1015":{"id":1015,"group_id":200,"title":"Weapon Mods","icon":"weapon_mods","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"951":{"id":951,"group_id":201,"title":"Boss","icon":"boss","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"954":{"id":954,"group_id":202,"title":"Extraction","icon":"exit","info":null,"template":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"952":{"id":952,"group_id":202,"title":"Location","icon":"location","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"957":{"id":957,"group_id":202,"title":"Locked Door","icon":"locked_door","info":null,"template":"**Key:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"956":{"id":956,"group_id":202,"title":"Miscellaneous","icon":"miscellaneous","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"955":{"id":955,"group_id":202,"title":"Quest Item","icon":"quest_item","info":null,"template":"**Quest:** ??  \n**Quest Giver:** ??","order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false},"953":{"id":953,"group_id":202,"title":"Spawn Point","icon":"spawn_point","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"visible":true,"description":null,"premium":false}},"regions":[],"locations":[{"id":33687,"map_id":68,"region_id":null,"category_id":971,"title":"PACA Armor Spawn","description":"Inside the container on the metal platform","latitude":"0.80626412182284","longitude":"-0.81854982915456","features":null,"tags":[],"media":[{"id":1499,"title":"","file_name":"33350699-5e49-4d6d-9f12-fd6fa8e7dc70.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/33350699-5e49-4d6d-9f12-fd6fa8e7dc70.jpg","type":"image","mime_type":"image\/png","order":10}]},{"id":41544,"map_id":68,"region_id":null,"category_id":971,"title":"3M Body Armor","description":"Potential spawn on top of the filing cabinets","latitude":"0.71695892144016","longitude":"-1.10238343384360","features":null,"tags":[],"media":[]},{"id":25065,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"By the fence - where it's partially collapsed","latitude":"0.79840523031682","longitude":"-0.72279097033288","features":null,"tags":[],"media":[]},{"id":25072,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"By the the blue fence and the container","latitude":"0.86307800622303","longitude":"-0.76108846802936","features":null,"tags":[],"media":[]},{"id":25075,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"Beside the window","latitude":"0.67005758770019","longitude":"-0.95066610035997","features":null,"tags":[],"media":[]},{"id":25076,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"Beside the window","latitude":"0.66387819683461","longitude":"-0.95066610035997","features":null,"tags":[],"media":[]},{"id":25078,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"Beside the large wooden box","latitude":"0.65318210001068","longitude":"-0.81748553829846","features":null,"tags":[],"media":[]},{"id":25083,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"By the servers, to the east side of the stack of wooden crates","latitude":"0.57027895268287","longitude":"-0.75661485383091","features":null,"tags":[],"media":[]},{"id":25110,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"Just outside the door, by the stairs","latitude":"0.60935370855171","longitude":"-0.75085859151000","features":null,"tags":[],"media":[]},{"id":25111,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"Just under the stairs","latitude":"0.71189885007444","longitude":"-0.82277538703386","features":null,"tags":[],"media":[]},{"id":25122,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"In the alcove by the small vehicle","latitude":"0.79974655843191","longitude":"-0.75385093422108","features":null,"tags":[],"media":[]},{"id":25123,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"In the alcove by the small vehicle","latitude":"0.80180629377093","longitude":"-0.75985908241444","features":null,"tags":[],"media":[]},{"id":33686,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"On the metal platform","latitude":"0.83034794202252","longitude":"-0.82472963872488","features":null,"tags":[],"media":[]},{"id":88019,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":null,"latitude":"0.64180749153095","longitude":"-0.30128669101009","features":null,"tags":[],"media":[]},{"id":88024,"map_id":68,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"On the back of a small truck between the forklifts.","latitude":"0.73763784087089","longitude":"-0.59226008414873","features":null,"tags":[],"media":[]},{"id":25061,"map_id":68,"region_id":null,"category_id":959,"title":"Dead SCAV","description":"Inside the small bunker","latitude":"0.62211788709672","longitude":"-0.76170450536620","features":null,"tags":[],"media":[]},{"id":118062,"map_id":68,"region_id":null,"category_id":969,"title":"Duffle Bag (?)","description":null,"latitude":"0.77467904623109","longitude":"-0.82757202563437","features":null,"tags":[],"media":[]},{"id":25070,"map_id":68,"region_id":null,"category_id":1017,"title":"Filing Cabinet","description":"","latitude":"0.72185309143132","longitude":"-1.10259483105890","features":null,"tags":[],"media":[]},{"id":25071,"map_id":68,"region_id":null,"category_id":1017,"title":"Filing Cabinet","description":"","latitude":"0.71945002224898","longitude":"-1.10259483105890","features":null,"tags":[],"media":[]},{"id":25066,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"At the bottom of the stairs, next to the blue lockers.","latitude":"0.76871058945547","longitude":"-0.74785353136804","features":null,"tags":[],"media":[]},{"id":25067,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"At the bottom of the stairs, next to the blue lockers.","latitude":"0.76838712616506","longitude":"-0.75193255387057","features":null,"tags":[],"media":[]},{"id":25088,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"Hanging on the wall","latitude":"0.91671721737639","longitude":"-0.57928865143833","features":null,"tags":[],"media":[]},{"id":25089,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"Hanging on the wall","latitude":"0.91671721737639","longitude":"-0.58409516999302","features":null,"tags":[],"media":[]},{"id":25095,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"Inside the [Locked Room](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25092)","latitude":"0.78582536962331","longitude":"-1.10196570701260","features":null,"tags":[],"media":[]},{"id":25119,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"On the wall inside the room","latitude":"0.73602998586574","longitude":"-1.10222728605120","features":null,"tags":[],"media":[]},{"id":25120,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"On the wall inside the room","latitude":"0.73345527692736","longitude":"-1.10222728605120","features":null,"tags":[],"media":[]},{"id":118058,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"In the inner room on the south wall.","latitude":"0.76713671706972","longitude":"-0.83466957020914","features":null,"tags":[],"media":[]},{"id":118059,"map_id":68,"region_id":null,"category_id":961,"title":"Jacket","description":"In the inner room on the south wall.","latitude":"0.76696507107572","longitude":"-0.83724449086344","features":null,"tags":[],"media":[]},{"id":25096,"map_id":68,"region_id":null,"category_id":947,"title":"Portable Bunkhouse Key","description":"Inside the [Locked Room](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25092)\n\n**Unlocks:** [Portable Cabin Bunkhouse [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30110)\n\n**Note:** This key was renamed in a recent update, it used to be the \"Portable cabin key of customs Factory zone\". Which was a mouthful!","latitude":"0.79269117323585","longitude":"-1.11655692405360","features":null,"tags":[],"media":[]},{"id":25112,"map_id":68,"region_id":null,"category_id":947,"title":"Door Key (Pumping Station)","description":"On the bench outside the showers.\n\n**Unlocks:** [Pumping Station Door](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25113)","latitude":"0.74408170971104","longitude":"-0.96808259134764","features":null,"tags":[],"media":[]},{"id":28175,"map_id":68,"region_id":null,"category_id":947,"title":"West Wing Room 306 Key","description":"In a locker.\n\n**Unlocks:** [West Wing Room 306 [Shoreline]](https:\/\/mapgenie.io\/tarkov\/maps\/shoreline?locationIds=28174)","latitude":"0.79445610000250","longitude":"-0.97447233383207","features":null,"tags":[],"media":[]},{"id":28413,"map_id":68,"region_id":null,"category_id":947,"title":"Key to Utility Room of Power Substation","description":"Inside the blue lockers\n\n**Unlocks:** [Power Substation Utility Room [Interchange]](https:\/\/mapgenie.io\/tarkov\/maps\/interchange?locationIds=28414)","latitude":"0.91652277723864","longitude":"-0.57403056947157","features":null,"tags":[],"media":[]},{"id":135216,"map_id":68,"region_id":null,"category_id":947,"title":"Lab. Blue Keycard","description":"On top of the electronic device next to the tarp-covering.  \n\n**Unlocks:** [Quarantine Zone (The Lab)](https:\/\/mapgenie.io\/tarkov\/maps\/lab?locationIds=31645)","latitude":"0.63575865822339","longitude":"-0.64582805984912","features":null,"tags":[],"media":[]},{"id":25063,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot (Propane Tank?)","description":"On the yellow truck by the wall","latitude":"0.70216120443588","longitude":"-0.68995004979979","features":null,"tags":[],"media":[]},{"id":25064,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"In the lockers by the wall","latitude":"0.74147239386989","longitude":"-0.68995004979979","features":null,"tags":[],"media":[]},{"id":25073,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the blue barrels in the corner","latitude":"0.80437603319408","longitude":"-0.82528982300983","features":null,"tags":[],"media":[]},{"id":25074,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the barrels by the door","latitude":"0.79373406282642","longitude":"-0.79919729371295","features":null,"tags":[],"media":[]},{"id":25077,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On top of the wooden box","latitude":"0.64328017191330","longitude":"-0.81710007857180","features":null,"tags":[],"media":[]},{"id":25079,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On top of the barrels","latitude":"0.69889343975299","longitude":"-0.86898106403873","features":null,"tags":[],"media":[]},{"id":25080,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On top of the barrels on the south side of the blue shipping container. Directly under the overhead walkway.","latitude":"0.61445343523577","longitude":"-0.85563407036761","features":null,"tags":[],"media":[]},{"id":25090,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"Inside the blue lockers by the jackets","latitude":"0.91688885677776","longitude":"-0.58907334992466","features":null,"tags":[],"media":[]},{"id":25094,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"Inside the [Locked Room](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25092)","latitude":"0.77278031175150","longitude":"-1.11775855369230","features":null,"tags":[],"media":[]},{"id":25115,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"Inside the Pumping Station","latitude":"0.81263429612305","longitude":"-0.64228527014643","features":null,"tags":[],"media":[]},{"id":25117,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"Inside the lockers","latitude":"0.71831502604165","longitude":"-0.96613504429070","features":null,"tags":[],"media":[]},{"id":25118,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the wooden shelves","latitude":"0.72761926452492","longitude":"-1.09415920133440","features":null,"tags":[],"media":[]},{"id":25124,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On top of the wooden box","latitude":"0.89863303052992","longitude":"-0.61243716063905","features":null,"tags":[],"media":[]},{"id":28332,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the back of the yellow vehicle","latitude":"0.72694026342633","longitude":"-0.72173520061517","features":null,"tags":[],"media":[]},{"id":33688,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the wooden crates inside the shipping container","latitude":"0.86239143855537","longitude":"-0.75469179692800","features":null,"tags":[],"media":[]},{"id":33689,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the blue cover on top of the wooden crates","latitude":"0.60945440079513","longitude":"-0.74815715726800","features":null,"tags":[],"media":[]},{"id":33691,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On the chair \n\nPossible morphine spawn.","latitude":"0.76116856545090","longitude":"-1.10486000045030","features":null,"tags":[],"media":[]},{"id":41563,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"On top of the barrels.","latitude":"0.78554304890417","longitude":"-0.74303763542036","features":null,"tags":[],"media":[]},{"id":73383,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"At the bottom of the open locker","latitude":"0.60918487954159","longitude":"-0.76574864960730","features":null,"tags":[],"media":[]},{"id":88065,"map_id":68,"region_id":null,"category_id":946,"title":"Loose Loot","description":"Potential propane tank spawn on top of the boxes","latitude":"0.67224415727521","longitude":"-0.24118071568671","features":null,"tags":[],"media":[]},{"id":118061,"map_id":68,"region_id":null,"category_id":946,"title":"Graphics Card","description":"On top of the office desk to the left","latitude":"0.76772739024091","longitude":"-0.82293716845663","features":null,"tags":[],"media":[]},{"id":88020,"map_id":68,"region_id":null,"category_id":943,"title":"Medical Supply Crate","description":null,"latitude":"0.61064407493636","longitude":"-0.63998194694170","features":null,"tags":[],"media":[]},{"id":88021,"map_id":68,"region_id":null,"category_id":943,"title":"Medbag SMU06","description":"Inside the medical tent - on the table surrounded by blue curtains.","latitude":"0.63261543784892","longitude":"-0.60633631705889","features":null,"tags":[],"media":[]},{"id":33690,"map_id":68,"region_id":null,"category_id":949,"title":"MBSS","description":"On the floor on the right as you enter\n\n**NB:** This is a new type of loot container post-wipe. Does not always spawn.","latitude":"0.76389294667492","longitude":"-1.10262840255000","features":null,"tags":[],"media":[{"id":1498,"title":"","file_name":"b6fb29af-0aed-4a41-865a-d3c913878514.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/b6fb29af-0aed-4a41-865a-d3c913878514.jpg","type":"image","mime_type":"image\/png","order":10}]},{"id":25069,"map_id":68,"region_id":null,"category_id":944,"title":"Safe","description":"Under the computer desk","latitude":"0.74708524036948","longitude":"-1.12044761426200","features":null,"tags":[],"media":[]},{"id":88018,"map_id":68,"region_id":null,"category_id":970,"title":"Technical Supply Crate","description":null,"latitude":"0.68025708015493","longitude":"-0.21785926181087","features":null,"tags":[],"media":[]},{"id":88022,"map_id":68,"region_id":null,"category_id":970,"title":"Toolbox","description":"Under the large truck (down the small stairs).","latitude":"0.77302384494104","longitude":"-0.65302821159014","features":null,"tags":[],"media":[]},{"id":118063,"map_id":68,"region_id":null,"category_id":970,"title":"Toolbox","description":"On the pallet at the back of the room","latitude":"0.74177847382704","longitude":"-0.82748765230281","features":null,"tags":[],"media":[]},{"id":25062,"map_id":68,"region_id":null,"category_id":958,"title":"Weapon Box [5x2]","description":"On the barrels in the corner, by the wrecked wall,","latitude":"0.61078889198522","longitude":"-0.69235330907713","features":null,"tags":[],"media":[]},{"id":25068,"map_id":68,"region_id":null,"category_id":958,"title":"Loose Weapon","description":"A loose weapon or attachment will spawn by the shelves here","latitude":"0.75034652806090","longitude":"-1.09916160351990","features":null,"tags":[],"media":[]},{"id":25082,"map_id":68,"region_id":null,"category_id":958,"title":"Weapon Box [6x3]","description":"At the base of the column","latitude":"0.66603196952529","longitude":"-0.84662551401334","features":null,"tags":[],"media":[]},{"id":25091,"map_id":68,"region_id":null,"category_id":958,"title":"Weapon Box [5x2]","description":"On top of the blue crates just next to the ramp","latitude":"0.80398677318750","longitude":"-0.61190431305943","features":null,"tags":[],"media":[]},{"id":25093,"map_id":68,"region_id":null,"category_id":958,"title":"Loose Weapon","description":"Inside the [Locked Room](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25092)\n\n**Note:** May not always spawn","latitude":"0.79269117323585","longitude":"-1.10763053245200","features":null,"tags":[],"media":[]},{"id":25121,"map_id":68,"region_id":null,"category_id":958,"title":"Weapon Box [5x2]","description":"On top of some boxes by the edge of the Silo Pit","latitude":"0.75594410162626","longitude":"-0.76289235456534","features":null,"tags":[],"media":[]},{"id":118060,"map_id":68,"region_id":null,"category_id":958,"title":"Weapon Box (?)","description":null,"latitude":"0.76971140615292","longitude":"-0.83836028981364","features":null,"tags":[],"media":[]},{"id":125772,"map_id":68,"region_id":null,"category_id":1015,"title":"Loose Weapon Mods","description":"On the shelf in the hall","latitude":"0.75444219248082","longitude":"-1.09947206807330","features":null,"tags":[],"media":[]},{"id":85804,"map_id":68,"region_id":null,"category_id":951,"title":"Tagilla","description":"Appears to spawn around this area.\n\n**Loot:**\n- Superfors DB 2020 Dead Blow Hammer [Melee Weapon]\n- Tagilla's Welding Mask \"UBEY\" [Headgear]\n- Tagilla's welding mask \"Gorilla\" [Headgear]\n-\n\n**Note:** New in 0.12.11","latitude":"0.69246513635590","longitude":"-0.76835632324219","features":null,"tags":[],"media":[{"id":7986,"title":"tagilla","file_name":"f26163c4-8a7e-4c57-afaa-8e30d93ed5f3.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/f26163c4-8a7e-4c57-afaa-8e30d93ed5f3.jpg","type":"image","mime_type":"image\/jpeg","order":10}]},{"id":25056,"map_id":68,"region_id":null,"category_id":954,"title":"Gate 3 [ALL]","description":"Look for the green exit sign to the right of the door.\n\n**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","latitude":"0.86642105422022","longitude":"-0.89967278115535","features":null,"tags":[],"media":[{"id":16115,"title":"2022-01-11[06-57]_61.0, 1.8, 34.0_0.0, 0.0, 0.0, 1.0 (0)","file_name":"7642746f-015c-452c-896a-426419d275b2.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/7642746f-015c-452c-896a-426419d275b2.png","type":"image","mime_type":"image\/png","order":10},{"id":16116,"title":"2022-01-11[06-56]_59.6, 1.7, 56.9_0.0, 0.0, 0.0, 1.0 (0)","file_name":"41c77e1d-f8db-46d7-8111-311809fce041.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/41c77e1d-f8db-46d7-8111-311809fce041.png","type":"image","mime_type":"image\/png","order":10}]},{"id":25057,"map_id":68,"region_id":null,"category_id":954,"title":"Gate 0 [ALL]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** \n- Factory Emergency Exit Key to unlock [Back Exit [Factory Key]](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25102)","latitude":"0.48890683159319","longitude":"-0.87106327560866","features":null,"tags":[],"media":[]},{"id":25058,"map_id":68,"region_id":null,"category_id":954,"title":"Camera Bunker Door [SCAV]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","latitude":"0.63737589788597","longitude":"-0.46088215112013","features":null,"tags":[],"media":[{"id":16278,"title":"ex camera bunker door","file_name":"a27facd9-a2a6-460a-8484-e1b44fa67118.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/a27facd9-a2a6-460a-8484-e1b44fa67118.png","type":"image","mime_type":"image\/png","order":10}]},{"id":25059,"map_id":68,"region_id":null,"category_id":954,"title":"Cellars [PMC]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** \n- Factory Emergency Exit Key to unlock [Cellars Door](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=155012)","latitude":"0.90075345682641","longitude":"-0.23875232934279","features":null,"tags":[],"media":[]},{"id":25060,"map_id":68,"region_id":null,"category_id":954,"title":"Office Window [SCAV]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","latitude":"0.73251428376186","longitude":"-1.12299964024240","features":null,"tags":[],"media":[{"id":16120,"title":"2022-01-11[07-21]_15.2, 9.7, 40.9_0.0, -0.8, 0.1, -0.6 (0)","file_name":"d8609e6c-764b-43b4-a84c-09f42e6a058e.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/d8609e6c-764b-43b4-a84c-09f42e6a058e.png","type":"image","mime_type":"image\/png","order":10}]},{"id":88025,"map_id":68,"region_id":null,"category_id":954,"title":"Med Tent Gates [PMC]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** \n- Factory Emergency Exit Key to unlock the [Med Tent Gate Door (Factory)](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=88026)","latitude":"0.62087468320462","longitude":"-0.51220323058794","features":null,"tags":[],"media":[]},{"id":25097,"map_id":68,"region_id":null,"category_id":952,"title":"Forklifts","description":"","latitude":"0.89223638380226","longitude":"-0.56055642452282","features":null,"tags":[],"media":[]},{"id":25098,"map_id":68,"region_id":null,"category_id":952,"title":"Glass Hall","description":"","latitude":"0.90837056116066","longitude":"-0.68689919796032","features":null,"tags":[],"media":[]},{"id":25099,"map_id":68,"region_id":null,"category_id":952,"title":"Unloading Area","description":"","latitude":"0.85687826009905","longitude":"-0.71264840450328","features":null,"tags":[],"media":[]},{"id":25100,"map_id":68,"region_id":null,"category_id":952,"title":"Engine Room","description":"","latitude":"0.81671378266758","longitude":"-0.72397805538219","features":null,"tags":[],"media":[]},{"id":25101,"map_id":68,"region_id":null,"category_id":952,"title":"Changing Rooms","description":"","latitude":"0.78059041690972","longitude":"-0.96814472617575","features":null,"tags":[],"media":[]},{"id":25103,"map_id":68,"region_id":null,"category_id":952,"title":"Processing Room","description":"","latitude":"0.73251283720414","longitude":"-0.77899642266880","features":null,"tags":[],"media":[]},{"id":25104,"map_id":68,"region_id":null,"category_id":952,"title":"Bunker Red Light","description":"","latitude":"0.62440093601327","longitude":"-0.45919798686214","features":null,"tags":[],"media":[]},{"id":25116,"map_id":68,"region_id":null,"category_id":952,"title":"Pumping Station","description":"","latitude":"0.80971634517647","longitude":"-0.65790645544917","features":null,"tags":[],"media":[]},{"id":25125,"map_id":68,"region_id":null,"category_id":952,"title":"Foreman's Office","description":"","latitude":"0.73310290267500","longitude":"-1.11180234976800","features":null,"tags":[],"media":[]},{"id":25126,"map_id":68,"region_id":null,"category_id":952,"title":"Engineer's Office [Locked Room]","description":"","latitude":"0.78202211727449","longitude":"-1.11266065665280","features":null,"tags":[],"media":[]},{"id":25128,"map_id":68,"region_id":null,"category_id":952,"title":"Upper Platform","description":"","latitude":"0.65637088479280","longitude":"-0.95652358326754","features":null,"tags":[],"media":[]},{"id":25129,"map_id":68,"region_id":null,"category_id":952,"title":"Lower Platform","description":"","latitude":"0.67213236525936","longitude":"-0.80982626452055","features":null,"tags":[],"media":[]},{"id":25130,"map_id":68,"region_id":null,"category_id":952,"title":"Bridge","description":"","latitude":"0.79950455953161","longitude":"-1.06648149738150","features":null,"tags":[],"media":[]},{"id":25131,"map_id":68,"region_id":null,"category_id":952,"title":"Holding Area","description":"","latitude":"0.65806706328205","longitude":"-0.87498568615933","features":null,"tags":[],"media":[]},{"id":25132,"map_id":68,"region_id":null,"category_id":952,"title":"Secretary's Office","description":"","latitude":"0.75867828028523","longitude":"-1.11201195748200","features":null,"tags":[],"media":[]},{"id":25133,"map_id":68,"region_id":null,"category_id":952,"title":"Silos","description":"","latitude":"0.70363449130149","longitude":"-0.72546700495968","features":null,"tags":[],"media":[]},{"id":25134,"map_id":68,"region_id":null,"category_id":952,"title":"Silo Pit","description":"","latitude":"0.68869676059845","longitude":"-0.38151844259880","features":null,"tags":[],"media":[]},{"id":65851,"map_id":68,"region_id":null,"category_id":952,"title":"Server Room","description":"","latitude":"0.56535637608034","longitude":"-0.76179865211930","features":null,"tags":[],"media":[]},{"id":88027,"map_id":68,"region_id":null,"category_id":952,"title":"Scav Bunker","description":"","latitude":"0.61444210404215","longitude":"-0.76539391090284","features":null,"tags":[],"media":[]},{"id":25092,"map_id":68,"region_id":null,"category_id":957,"title":"Locked Room","description":"**Requires:** Factory Exit Key\n- [Spawn #1 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30122)\n- [Spawn #2 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30090)\n- Random Drop","latitude":"0.77539825869530","longitude":"-1.10069987930360","features":null,"tags":[],"media":[]},{"id":25102,"map_id":68,"region_id":null,"category_id":957,"title":"Back Exit [Factory Key]","description":"Behind the barrels\n\n**Requires:** Factory Emergency Exit Key\n- [Spawn #1 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30122)\n- [Spawn #2 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30090)","latitude":"0.51173449916082","longitude":"-0.87611796704402","features":null,"tags":[],"media":[{"id":16117,"title":"2022-01-11[06-58]_-43.6, 2.8, 53.6_0.0, -0.6, 0.0, 0.8 (0)","file_name":"a41dd360-a468-4f25-ac81-ee69cd7ca12e.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/a41dd360-a468-4f25-ac81-ee69cd7ca12e.png","type":"image","mime_type":"image\/png","order":10}]},{"id":25113,"map_id":68,"region_id":null,"category_id":957,"title":"Pumping Station Door","description":"**Key:** [Door Key (Pumping Station)](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25112)","latitude":"0.81606717689040","longitude":"-0.67218481183193","features":null,"tags":[],"media":[]},{"id":25114,"map_id":68,"region_id":null,"category_id":957,"title":"Pumping Station Door (Alt)","description":"**Key:** Door Key (Random drop from dead Scavs)","latitude":"0.81958399122351","longitude":"-0.64571849768549","features":null,"tags":[],"media":[]},{"id":88026,"map_id":68,"region_id":null,"category_id":957,"title":"Med Tent Gate Door (Factory)","description":"**Requires:** Factory Emergency Exit Key\n- [Spawn #1 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30122)\n- [Spawn #2 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30090)","latitude":"0.62104633450015","longitude":"-0.53666775160968","features":null,"tags":[],"media":[{"id":16118,"title":"2022-01-11[06-51]_-17.9, 1.8, -36.7_0.0, 1.0, 0.0, -0.1 (0)","file_name":"d8547f9e-dad4-4d41-8159-a8503752f7a7.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/d8547f9e-dad4-4d41-8159-a8503752f7a7.png","type":"image","mime_type":"image\/png","order":10}]},{"id":155012,"map_id":68,"region_id":null,"category_id":957,"title":"Cellars Door","description":"**Requires:** Factory Emergency Exit Key\n- [Spawn #1 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30122)\n- [Spawn #2 [Customs]](https:\/\/mapgenie.io\/tarkov\/maps\/customs?locationIds=30090)","latitude":"0.88920412443383","longitude":"-0.23428869161035","features":null,"tags":[],"media":[{"id":16119,"title":"2022-01-11[06-53]_65.5, -1.2, -35.0_0.0, 0.0, 0.0, 1.0 (0)","file_name":"c861a8e1-1441-46ce-9bbd-eb64e79ed9ec.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/c861a8e1-1441-46ce-9bbd-eb64e79ed9ec.png","type":"image","mime_type":"image\/png","order":10}]},{"id":88023,"map_id":68,"region_id":null,"category_id":956,"title":"Map Edit: Missing Staircase to Catwalk","description":null,"latitude":"0.61492356889401","longitude":"-0.68152400016436","features":null,"tags":[],"media":[]},{"id":30432,"map_id":68,"region_id":null,"category_id":955,"title":"Gas Analyzer","description":"**Quest:** Sanitary Standards - Part 1\n\n**Note:** The Gas Analyzer is a random spawn inside the [Pumping Station](https:\/\/mapgenie.io\/tarkov\/maps\/factory?locationIds=25113). But you're more likely to find one in the Electronics stores on Interchange.","latitude":"0.80949589216608","longitude":"-0.64325024630875","features":null,"tags":[],"media":[]},{"id":33740,"map_id":68,"region_id":null,"category_id":955,"title":"Control Board #1","description":"**Quest:** Farming - Part 1","latitude":"0.89929934689595","longitude":"-0.71250320518152","features":null,"tags":[],"media":[]},{"id":33741,"map_id":68,"region_id":null,"category_id":955,"title":"Control Board #2","description":"**Quest:** Farming - Part 1","latitude":"0.87417840286919","longitude":"-0.53110147602524","features":null,"tags":[],"media":[]},{"id":41543,"map_id":68,"region_id":null,"category_id":955,"title":"Factory Swing\/Break Room","description":"**Quest:** Delivery From the Past  \n\nThis is where you need to drop off the _Secure Case For Documents 0022_","latitude":"0.81352350398353","longitude":"-0.82078503838329","features":null,"tags":[],"media":[]},{"id":54351,"map_id":68,"region_id":null,"category_id":955,"title":"Syringe with a Chemical","description":"**Quest:** Chemical - Part 3 \n\nInside the filing cabinet","latitude":"0.76615300211573","longitude":"-1.11204714635620","features":null,"tags":[],"media":[]},{"id":54352,"map_id":68,"region_id":null,"category_id":955,"title":"Postman Pat Letter","description":"**Quest:** Postman Pat - Part 1\n\nOn the neck of the dead scav","latitude":"0.61848834978852","longitude":"-0.76119320833607","features":null,"tags":[],"media":[]},{"id":118057,"map_id":68,"region_id":null,"category_id":955,"title":"Gunpowder \"Kite\" Drop Spot","description":"**Quest:** Health Care Privacy - Part 5  \n**Quest Giver:** Therapist","latitude":"0.75970815813061","longitude":"-1.11442643315210","features":null,"tags":[],"media":[]},{"id":25081,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point","description":"","latitude":"0.52021596994309","longitude":"-0.87753876776219","features":null,"tags":[],"media":[]},{"id":25105,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point","description":"","latitude":"0.61255699109288","longitude":"-0.45919798686214","features":null,"tags":[],"media":[]},{"id":25106,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point","description":"","latitude":"0.54097618107120","longitude":"-0.84144002314747","features":null,"tags":[],"media":[]},{"id":25107,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn - Barrel Room","description":"","latitude":"0.62220172348261","longitude":"-0.90333649540594","features":null,"tags":[],"media":[]},{"id":25108,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point","description":"","latitude":"0.75201749315088","longitude":"-0.32817821579408","features":null,"tags":[],"media":[]},{"id":25109,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn - Forklifts","description":"","latitude":"0.90757962271205","longitude":"-0.51433300380688","features":null,"tags":[],"media":[]},{"id":25127,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn - Death Box","description":"","latitude":"0.80687587348481","longitude":"-0.58848778608990","features":null,"tags":[],"media":[]},{"id":25170,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point [PMC]","description":"","latitude":"0.86504730745275","longitude":"-0.77420787254323","features":null,"tags":[],"media":[]},{"id":28331,"map_id":68,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"","latitude":"0.59634001938667","longitude":"-0.71692607799650","features":null,"tags":[],"media":[]},{"id":41558,"map_id":68,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"","latitude":"0.79390846244733","longitude":"-0.81089142505789","features":null,"tags":[],"media":[]},{"id":61743,"map_id":68,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"","latitude":"0.90121473600735","longitude":"-0.66707808710339","features":null,"tags":[],"media":[]},{"id":88559,"map_id":68,"region_id":null,"category_id":953,"title":"Spawn Point","description":null,"latitude":"0.67650359994763","longitude":"-0.27393469977540","features":null,"tags":[],"media":[{"id":8653,"title":"","file_name":"cc9a9e90-b831-4f0e-b117-3263f2587b35.jpg","attribution":"","url":"https:\/\/storage-cdn.mapgenie.io\/storage\/media\/cc9a9e90-b831-4f0e-b117-3263f2587b35.png","type":"image","mime_type":"image\/jpeg","order":10}]},{"id":88576,"map_id":68,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.65607544502860","longitude":"-0.65368652343750","features":null,"tags":[],"media":[]}],"heatmapGroups":[],"heatmapCategories":[],"routes":[],"notes":[],"sharedNotes":{},"maxMarkedLocations":100,"tags":[],"tagsById":[],"distanceToolConfig":{"useHaversine":false,"scale":316.3,"lineStyle":{"strokeColor":"#fdf3cf"},"speeds":[{"name":"Sprinting - Pistol","speedMps":7},{"name":"Sprinting","speedMps":6.2},{"name":"Walking","speedMps":3.1}]},"mapConfig":{"initial_zoom":11,"start_lat":0.76558695844488,"start_lng":-0.83770751953125,"overlay":null,"overzoom":false,"tile_sets":[{"name":"Light","path":"\/games\/tarkov\/factory\/default-v2","min_zoom":9,"max_zoom":15,"extension":"png","bounds":{"10":{"x":{"min":508,"max":511},"y":{"min":508,"max":511}},"11":{"x":{"min":1016,"max":1023},"y":{"min":1016,"max":1023}},"12":{"x":{"min":2032,"max":2047},"y":{"min":2032,"max":2047}},"13":{"x":{"min":4064,"max":4095},"y":{"min":4064,"max":4095}},"14":{"x":{"min":8128,"max":8191},"y":{"min":8128,"max":8191}},"15":{"x":{"min":16256,"max":16383},"y":{"min":16256,"max":16383}},"16":{"x":{"min":32512,"max":32767},"y":{"min":32512,"max":32767}},"17":{"x":{"min":65024,"max":65535},"y":{"min":65024,"max":65535}},"8":{"x":{"min":127,"max":127},"y":{"min":127,"max":127}},"9":{"x":{"min":254,"max":255},"y":{"min":254,"max":255}}}},{"name":"Dark","path":"\/games\/tarkov\/factory\/dark-v2","min_zoom":9,"max_zoom":15,"extension":"png","bounds":{"10":{"x":{"min":508,"max":511},"y":{"min":508,"max":511}},"11":{"x":{"min":1016,"max":1023},"y":{"min":1016,"max":1023}},"12":{"x":{"min":2032,"max":2047},"y":{"min":2032,"max":2047}},"13":{"x":{"min":4064,"max":4095},"y":{"min":4064,"max":4095}},"14":{"x":{"min":8128,"max":8191},"y":{"min":8128,"max":8191}},"15":{"x":{"min":16256,"max":16383},"y":{"min":16256,"max":16383}},"16":{"x":{"min":32512,"max":32767},"y":{"min":32512,"max":32767}},"17":{"x":{"min":65024,"max":65535},"y":{"min":65024,"max":65535}},"8":{"x":{"min":127,"max":127},"y":{"min":127,"max":127}},"9":{"x":{"min":254,"max":255},"y":{"min":254,"max":255}}}}]},"proCategoryLocationCounts":[],"searchQuery":null};window.specialData = [];window.isEditor = false;window.isEmbedded = false;window.isMini = false;window.partner = null;window.embedType = null;window.needsVerification = false;window.game = {"id":20,"title":"Escape From Tarkov","slug":"tarkov"};window.config = {"autosave":true,"suggestionsEnabled":true,"newSuggestionsEnabled":true,"tooltipsEnabled":true,"showRegionsInInfoWindow":false,"regionLocationFocusEnabled":false,"regionFiltersEnabled":false,"altMapSdk":true,"proOnlyMedia":false,"v2popupEnabled":true,"rememberFiltersEnabled":true,"presetsEnabled":true,"routesEnabled":false};</script><!-- JS Variables bounds here --></div>
+
+<!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/5.0.1/markdown-it.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js"></script>
+
+    <script>
+        window.onmessage = function(e) {
+            if (e.data == 'hello') {
+                $('nav').toggle();
+            }
+        };
+
+        // myIframe.contentWindow.postMessage('hello', '*');
+    </script>
+
+    <script>
+      window.isMobile = window.self === window.top ? screen.width < 768 : window.innerWidth < 768;
+      window.isMobile = window.isEmbedded ? window.embedType === 'compact' : window.isMobile;
+      window.md = window.markdownit({
+        html: false,
+      });
+      md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+        var token = tokens[idx];
+        var href = token.attrs[0][1];
+        if (href.endsWith('.mp3')) {
+          token.tag = "audio"
+          token.attrs = [['src', href], ['controls', 'true']]
+        } else {
+          token.attrPush(['target', '_blank']);
+        }
+        return self.renderToken(tokens, idx, options, env, self);
+      };
+      window.isOverwolf = false;
+    </script>
+    <script>
+  // Normalizes the coords that tiles repeat across the x axis (horizontally)
+  // like the standard Google map tiles.
+  function getNormalizedCoord(coord, zoom, bounds) {
+    var y = coord.y;
+    var x = coord.x;
+
+    // tile range in one direction range is dependent on zoom level
+    // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+    var tileRange = 1 << zoom;
+
+    // don't repeat across y-axis (vertically)
+    if (y < 0 || y >= tileRange) {
+      //y = (y % tileRange + tileRange) % tileRange;
+      return null;
+    }
+
+    // don't repeat across x-axis (horizontally)
+    if (x < 0 || x >= tileRange) {
+      //x = (x % tileRange + tileRange) % tileRange;
+      return null;
+    }
+
+    if (bounds) {
+      if (x < bounds[zoom].x.min || x > bounds[zoom].x.max) {
+        return null;
+      }
+
+      if (y < bounds[zoom].y.min || y > bounds[zoom].y.max) {
+        return null;
+      }
+    }
+
+    return {x: x, y: y};
+  }
+
+  function createImageMapType(name, path, minZoom, maxZoom, bounds) {
+    return new google.maps.ImageMapType({
+      getTileUrl: function (coord, zoom) {
+        const normalizedCoord = getNormalizedCoord(coord, zoom, bounds);
+        if (!normalizedCoord) {
+          return null;
+        }
+        return window.cdnUrl + path + '/' + zoom + '-' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+      },
+      tileSize: new google.maps.Size(256, 256),
+      maxZoom: maxZoom,
+      minZoom: minZoom,
+      radius: 1738000,
+      name: name,
+    });
+  }
+
+  function createFolderMapType(name, path, minZoom, maxZoom, imageType, tileSize, bounds) {
+    const suffix = imageType || "jpg";
+    return new google.maps.ImageMapType({
+      getTileUrl: function (coord, zoom) {
+        const normalizedCoord = getNormalizedCoord(coord, zoom, bounds || window.MAP_BOUNDS);
+        if (!normalizedCoord) {
+          return null;
+        }
+
+                      return window.tilesCdnUrl + path + '/' + zoom + '/' + normalizedCoord.x + '/' + normalizedCoord.y + '.' + suffix;
+                },
+      tileSize: new google.maps.Size(tileSize, tileSize),
+      maxZoom: maxZoom,
+      minZoom: minZoom,
+      radius: 1738000,
+      name: name,
+    });
+  }
+
+      window.initialZoom = 11;
+  window.initialPosition = {lat: 0.76558695844488, lng: -0.83770751953125};
+  window.getMapTypes = function () {
+    return [
+                                createFolderMapType("Light", "/games/tarkov/factory/default-v2", 9, 15, 'png', 256, {"10":{"x":{"min":508,"max":511},"y":{"min":508,"max":511}},"11":{"x":{"min":1016,"max":1023},"y":{"min":1016,"max":1023}},"12":{"x":{"min":2032,"max":2047},"y":{"min":2032,"max":2047}},"13":{"x":{"min":4064,"max":4095},"y":{"min":4064,"max":4095}},"14":{"x":{"min":8128,"max":8191},"y":{"min":8128,"max":8191}},"15":{"x":{"min":16256,"max":16383},"y":{"min":16256,"max":16383}},"16":{"x":{"min":32512,"max":32767},"y":{"min":32512,"max":32767}},"17":{"x":{"min":65024,"max":65535},"y":{"min":65024,"max":65535}},"8":{"x":{"min":127,"max":127},"y":{"min":127,"max":127}},"9":{"x":{"min":254,"max":255},"y":{"min":254,"max":255}}}),
+                        createFolderMapType("Dark", "/games/tarkov/factory/dark-v2", 9, 15, 'png', 256, {"10":{"x":{"min":508,"max":511},"y":{"min":508,"max":511}},"11":{"x":{"min":1016,"max":1023},"y":{"min":1016,"max":1023}},"12":{"x":{"min":2032,"max":2047},"y":{"min":2032,"max":2047}},"13":{"x":{"min":4064,"max":4095},"y":{"min":4064,"max":4095}},"14":{"x":{"min":8128,"max":8191},"y":{"min":8128,"max":8191}},"15":{"x":{"min":16256,"max":16383},"y":{"min":16256,"max":16383}},"16":{"x":{"min":32512,"max":32767},"y":{"min":32512,"max":32767}},"17":{"x":{"min":65024,"max":65535},"y":{"min":65024,"max":65535}},"8":{"x":{"min":127,"max":127},"y":{"min":127,"max":127}},"9":{"x":{"min":254,"max":255},"y":{"min":254,"max":255}}}),
+            ];
+  };
+  window.mapTypeIds = ['Light','Dark'];
+      
+</script>    <script src="https://cdn.mapgenie.io/js/map.js?id=951b1102a060f9f1ca72"></script>
+    <script>
+                if (isMobile) {
+          document.getElementById('categories').style.maxHeight = (window.innerHeight - 140) + "px";
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+
+            
+        
+    
+
+    
+
+
+    
+    
+    
+        
+    <script>
+      if (window.gtag) {
+        setTimeout(function () {
+          window.gtag('event', 'view_map', {
+            'event_label': window.game.title + " - " + window.mapData.map.title,
+          });
+        }, 10000)
+      }
+    </script>
+
+    
+    
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4e9fe49b35e942b59034411754efdb65"}'></script>
+</body>
+</html>
