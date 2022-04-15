@@ -55,7 +55,7 @@ Therefore, it is near impossible to banned for using this tool unless Battlestat
 ## Installation
 
 **Simplest Method:**
-Click this [link](https://github.com/sammereye/TarkovHandbook/releases/latest/download/TarkovHandbook-latest.zip), to download the latest version. Once it is downloaded, extract the files to an easily accessible folder, such as a folder named TarkovHandbook on your Desktop. From there, open the `TarkovHandbook.exe` file and you are ready to go.
+Click this [link](https://github.com/sammereye/TarkovHandbook/releases/download/v1.0.2/tarkovhandbook1.0.2.zip), to download the latest version. Once it is downloaded, extract the files to an easily accessible folder, such as a folder named TarkovHandbook on your Desktop. From there, open the `TarkovHandbook.exe` file and you are ready to go.
 
 **Other things to note:** 
 - Change your game to **Borderless** in the Graphics settings so that the application can easily overlay the game.
