@@ -206,10 +206,15 @@ setInterval(updateData, 1000 * 60 * 30)
 
 async function updateData() { 
   items = '', itemsDictionary = {}, db = '', questItems = {}, quests = '', questDB = '', hideout = '', hideoutItems = {}, crafts = '', craftItems = [];
-	await makeSynchronousRequestForQuests();
-  await makeSynchronousRequestForItems();
-  await makeSynchronousRequestForHideout();
-  await makeSynchronousRequestForCrafts();
+
+  let requests = [
+    makeSynchronousRequestForQuests(),
+    makeSynchronousRequestForItems(),
+    makeSynchronousRequestForHideout(),
+    makeSynchronousRequestForCrafts()
+  ];
+
+  await Promise.all(requests);
 
   db = new MiniSearch({
     fields: ['name', 'shortName'], // fields to index for full-text search
