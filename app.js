@@ -39,9 +39,8 @@ let questPathList = []
 
 let options = {
   'method': 'POST',
-  'url': 'https://tarkov-tools.com/graphql',
+  'url': 'https://api.tarkov.dev/graphql',
   'headers': {
-    'authority': 'tarkov-tools.com',
     'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"',
     'accept': 'application/json',
     'dnt': '1',
@@ -49,11 +48,9 @@ let options = {
     'sec-ch-ua-mobile': '?0',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
     'sec-ch-ua-platform': '"Windows"',
-    'origin': 'https://tarkov-tools.com',
     'sec-fetch-site': 'same-origin',
     'sec-fetch-mode': 'cors',
     'sec-fetch-dest': 'empty',
-    'referer': 'https://tarkov-tools.com/item/golden-rooster',
     'accept-language': 'en-US,en;q=0.9'
   },
   body: JSON.stringify({
@@ -160,9 +157,8 @@ let craftItems = [];
 
 let craftOptions = {
   'method': 'POST',
-  'url': 'https://tarkov-tools.com/graphql',
+  'url': 'https://api.tarkov.dev/graphql',
   'headers': {
-    'authority': 'tarkov-tools.com',
     'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"',
     'accept': 'application/json',
     'dnt': '1',
@@ -170,11 +166,9 @@ let craftOptions = {
     'sec-ch-ua-mobile': '?0',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
     'sec-ch-ua-platform': '"Windows"',
-    'origin': 'https://tarkov-tools.com',
     'sec-fetch-site': 'same-origin',
     'sec-fetch-mode': 'cors',
     'sec-fetch-dest': 'empty',
-    'referer': 'https://tarkov-tools.com/hideout-profit/',
     'accept-language': 'en-US,en;q=0.9'
   },
   body: JSON.stringify({
