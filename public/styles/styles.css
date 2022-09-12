@@ -143,6 +143,10 @@ body {
   overflow-y: scroll;
 }
 
+.search-results-container a {
+  color: #e3e3ed;
+}
+
 .map-results-container {
   width: 98%;
 }
