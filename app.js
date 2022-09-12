@@ -218,7 +218,7 @@ async function updateData() {
 
   db = new MiniSearch({
     fields: ['name', 'shortName'], // fields to index for full-text search
-    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices', 'basePrice'], // fields to return with search results
+    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices', 'basePrice', 'wikiLink'], // fields to return with search results
     searchOptions: {
       fuzzy: 0.2, 
       prefix: true,
@@ -428,11 +428,15 @@ function createWindow () {
     transparent: true,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     }
   })
 
   // win.minimize();
+  win.webContents.on('will-navigate', function(e, url) {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
 
   app.window = win
 

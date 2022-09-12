@@ -180,7 +180,7 @@ $(document).ready(() => {
   
         let nameElement = 
           $('<div/>', {class: 'name-container'}).append(
-            $('<div/>', {class: 'short-name', text: data[i].shortName})
+            $('<a/>', {class: 'short-name', text: data[i].shortName, href: data[i].wikiLink})
           ).append(
             nameSecondaryElement
           )
