@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Price List</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #price-list {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(28, 28, 39, 0.95);
+    border-radius: 3px;
+    padding-top: 2px;
+    height: 125px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    overflow: hidden;
+    flex-wrap: wrap;
+  }
+
+  .price {
+    display: inline-block;
+    font-weight: 400;
+    font-size: 14px;
+    width: fit-content;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    padding: 2px 7px;
+  }
+
+  .total {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background-color: white;
+    color: rgba(28, 28, 39, 0.95);
+    font-weight: 900;
+  }
+
+  .recentlyAdded {
+    background-color: rgb(47 162 197 / 95%);
+  }
+
+  .cheapestItem {
+    background-color: rgb(229 46 46 / 95%) !important;
+  }
+</style>
+<body>
+  <div id="price-list"></div>
+  <script src="scripts/priceListScript.js"></script>
+</body>
+</html>

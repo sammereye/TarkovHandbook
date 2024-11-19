@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ground Zero | Escape From Tarkov Interactive Map | Map Genie</title>
+
+<meta charset="utf-8">
+<meta name="description" content="Interactive Maps for Escape From Tarkov. Custom tactical maps with all exits, loot, keys &amp; weapon spawns marked out.">
+<meta name="keyword" content="Escape From Tarkov Map, Tarkov Exit Map, Tarkov Customs Map, EFT Map, EFT Loot Map, Tarkov Loot Map, Tarkov Woods Map, EFT Shoreline Map, EFT Interchange Map">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+<meta property="og:url" content="https://mapgenie.io/tarkov/maps/ground-zero"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Ground Zero | Escape From Tarkov Interactive Map | Map Genie"/>
+<meta property="og:description" content="Interactive Maps for Escape From Tarkov. Custom tactical maps with all exits, loot, keys &amp; weapon spawns marked out."/>
+<meta property="og:image" content="https://cdn.mapgenie.io/images/games/tarkov/preview.jpg"/>
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.mapgenie.io/favicons/tarkov/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.mapgenie.io/favicons/tarkov/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.mapgenie.io/favicons/tarkov/favicon-16x16.png">
+
+<link rel="manifest" href="https://cdn.mapgenie.io/favicons/tarkov/site.webmanifest">
+<link rel="mask-icon" href="https://cdn.mapgenie.io/favicons/tarkov/safari-pinned-tab.svg" color="#5e3760">
+<meta name="msapplication-TileColor" content="#1e4964">
+<meta name="theme-color" content="#1e4964">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="csrf-token" content="36ZS7vGRWb7PwMHobI3Yq8OkFIc0rr48XiVSTzA2">
+            <meta name="auth-token" content="14f7a08e-b0d5-4fca-afc8-507d2a30e9cb">
+        <meta name="base-url" content="https://mapgenie.io">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" integrity="sha512-rt/SrQ4UNIaGfDyEXZtNcyWvQeOq0QLygHluFQcSjaGB04IxWhal71tKuzP6K8eYXYB6vJV4pHkXcmFGGQ1/0w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdn.mapgenie.io/css/app.css?id=0a86b189228f3ec5284a86297c9f117d" rel="stylesheet">
+
+                        <link href="https://cdn.mapgenie.io/css/themes/base-theme.css?id=58cc7d8ba105a123ee1de62e2cf0a79f" rel="stylesheet">
+            <link href="https://cdn.mapgenie.io/css/themes/tarkov.css?id=6978d3916787a8580cac7a70fdfaffc0" rel="stylesheet">
+        
+    
+    <style>
+        
+        .guide .location-link:after {
+            content: "\f31c";
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon:before {
+            content: '\f273';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon:before {
+            content: '\f368';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-fullscreen .mapboxgl-ctrl-icon:before {
+            content: '\f2e7';
+        }
+
+        .mapboxgl-ctrl .mapboxgl-ctrl-shrink .mapboxgl-ctrl-icon:before {
+            content: '\f2d8';
+        }
+
+        .switcher-expander:after {
+            content: "\f273";
+        }
+
+        .switcher-expander.expanded:after {
+            content: "\f368";
+        }
+    </style>
+
+    
+    
+            <script src='https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css' rel='stylesheet'/>
+
+        
+            
+
+            <script>
+const MARKER_SPRITE_POSITIONS_V3 = {"960":{"width":66,"height":88,"x":0,"y":0,"pixelRatio":2},"971":{"width":66,"height":88,"x":66,"y":0,"pixelRatio":2},"948":{"width":66,"height":88,"x":198,"y":0,"pixelRatio":2},"941":{"width":66,"height":88,"x":330,"y":0,"pixelRatio":2},"959":{"width":66,"height":88,"x":0,"y":88,"pixelRatio":2},"969":{"width":66,"height":88,"x":132,"y":88,"pixelRatio":2},"1017":{"width":66,"height":88,"x":330,"y":88,"pixelRatio":2},"942":{"width":66,"height":88,"x":396,"y":88,"pixelRatio":2},"961":{"width":66,"height":88,"x":264,"y":0,"pixelRatio":2},"947":{"width":66,"height":88,"x":0,"y":176,"pixelRatio":2},"946":{"width":66,"height":88,"x":198,"y":176,"pixelRatio":2},"943":{"width":66,"height":88,"x":264,"y":176,"pixelRatio":2},"945":{"width":66,"height":88,"x":396,"y":176,"pixelRatio":2},"949":{"width":66,"height":88,"x":0,"y":264,"pixelRatio":2},"968":{"width":66,"height":88,"x":66,"y":264,"pixelRatio":2},"1016":{"width":66,"height":88,"x":198,"y":264,"pixelRatio":2},"944":{"width":66,"height":88,"x":66,"y":352,"pixelRatio":2},"970":{"width":66,"height":88,"x":396,"y":352,"pixelRatio":2},"1013":{"width":66,"height":88,"x":66,"y":440,"pixelRatio":2},"958":{"width":66,"height":88,"x":132,"y":440,"pixelRatio":2},"1015":{"width":66,"height":88,"x":264,"y":440,"pixelRatio":2},"951":{"width":66,"height":88,"x":132,"y":0,"pixelRatio":2},"4737":{"width":66,"height":88,"x":396,"y":0,"pixelRatio":2},"4736":{"width":66,"height":88,"x":0,"y":352,"pixelRatio":2},"950":{"width":66,"height":88,"x":132,"y":352,"pixelRatio":2},"1011":{"width":66,"height":88,"x":198,"y":352,"pixelRatio":2},"1012":{"width":66,"height":88,"x":264,"y":352,"pixelRatio":2},"1019":{"width":66,"height":88,"x":66,"y":88,"pixelRatio":2},"1014":{"width":66,"height":88,"x":198,"y":88,"pixelRatio":2},"4739":{"width":66,"height":88,"x":198,"y":440,"pixelRatio":2},"954":{"width":66,"height":88,"x":264,"y":88,"pixelRatio":2},"952":{"width":66,"height":88,"x":66,"y":176,"pixelRatio":2},"957":{"width":66,"height":88,"x":132,"y":176,"pixelRatio":2},"956":{"width":66,"height":88,"x":330,"y":176,"pixelRatio":2},"4740":{"width":66,"height":88,"x":132,"y":264,"pixelRatio":2},"1018":{"width":66,"height":88,"x":264,"y":264,"pixelRatio":2},"955":{"width":66,"height":88,"x":330,"y":264,"pixelRatio":2},"4738":{"width":66,"height":88,"x":396,"y":264,"pixelRatio":2},"953":{"width":66,"height":88,"x":330,"y":352,"pixelRatio":2},"972":{"width":66,"height":88,"x":0,"y":440,"pixelRatio":2}};
+const MARKER_IMAGES_WIDTH = 462;
+const MARKER_IMAGES_HEIGHT = 528;
+const MARKER_IMAGES_URL = '/images/games/tarkov/markers@2x.png?MTY5NzU3';
+</script>    
+    <style>
+        .gmnoprint:not(.gm-bundled-control):not([role="menubar"]):not([data-control-width="40"]) {
+            display: none;
+        }
+
+        #zdcFloatingBtn {
+            display: none !important;
+        }
+
+        /*#map {*/
+        /*    right: -3000px;*/
+        /*    bottom: -3000px;*/
+        /*}*/
+
+            </style>
+
+            <style>
+            #blobby-left {
+                display: none;
+            }
+
+            #categories, #search-results-wrapper {
+                padding-bottom: 0 !important;
+            }
+        </style>
+    
+    
+    
+
+
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZRVRWZWGJ"></script>
+        <script>
+          window.Analytics = {
+            trackEvent: function (event, params = {}) {
+              params.send_to = 'G-ZZRVRWZWGJ';
+              window.gtag('event', event, params);
+            },
+            trackEngagement: function (event, params = {}, metaParams = {}) {
+              params.engagement = 1
+              if (!metaParams.group && metaParams.category) metaParams.group = store.getState().map.groupsById[metaParams.category.group_id];
+              if (metaParams.group) params.group = metaParams.group.title;
+              if (metaParams.category) params.category = metaParams.category.title;
+              if (metaParams.location) params.location = metaParams.location.title;
+              window.Analytics.trackEvent(event, params)
+            },
+            setDefaultParams: function (params) {
+              // This doesn't appear to work
+              //window.gtag('set', params)
+              // params.debug_mode = true;
+              window.gtag('config', 'G-ZZRVRWZWGJ', params);
+            },
+          }
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+
+          window.gtag = gtag;
+
+          gtag('js', new Date());
+          gtag('set', 'auth_status', 'logged_in');
+                    gtag('set', 'user_type', 'pro');
+          
+          gtag('set', 'content_group', "tarkov");
+          gtag('config', 'G-ZZRVRWZWGJ', {
+            // Required for analytics to work in embeds
+            cookie_flags: 'max-age=63072000;secure;samesite=none',
+            // Potentially only works when set with initial config ? Doesn't seem  to work with gtag('set', 'content_group', "...")
+            content_group: "tarkov",
+          });
+          gtag('config', 'AW-658861064');
+        </script>
+    </head>
+
+<body class="theme-tarkov  map map-577  pro Default pogo">
+<div id="app">
+    
+    
+    
+    
+    
+    <!-- Mobile Header -->
+    <nav id="header" class="navbar navbar-light fixed-top">
+                    <a href="https://mapgenie.io/tarkov">
+                <div class="navbar-logo" href="#"><img src="https://cdn.mapgenie.io/images/games/tarkov/logo-small.png" height="36" alt="Escape From Tarkov Map"></div>
+            </a>
+                <div class="flex-fill"></div>
+
+                    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-maps" data-parent="#header" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle maps navigation">
+                <span class="navbar-toggler-categories navbar-toggler-maps">Maps</span>
+            </button>
+        
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse" data-parent="#header" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle category navigation">
+            <span class="navbar-toggler-icon navbar-toggler-categories"></span>
+        </button>
+
+        <button id="navbar-toggler-user" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-user" data-parent="#header" aria-controls="navbar-collapse-user" aria-expanded="false" aria-label="Toggle user navigation"
+                data-placement="bottom" title="Login to track your progress and add personal locations">
+            <span class="navbar-toggler-icon navbar-toggler-user"></span>
+        </button>
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse-search" data-parent="#header" aria-controls="navbar-collapse-search" aria-expanded="false" aria-label="Toggle search navigation">
+            <span class="navbar-toggler-icon navbar-toggler-search"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-search"></div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-user"></div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse"></div>
+
+                    <div class="collapse navbar-collapse" id="navbar-collapse-maps">
+                <div class="map-switcher-panel">
+                                                                                                        <a class="map-link " href="https://mapgenie.io/tarkov/maps/factory">Factory[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/woods">Woods[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/customs">Customs[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/interchange">Interchange[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/reserve">Reserve[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/shoreline">Shoreline[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/lab">The Lab[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/lighthouse">Lighthouse[WIP]</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/streets">Streets[WIP]</a>
+                                                                                                                                                            <a class="map-link selected" href="https://mapgenie.io/tarkov/maps/ground-zero">Ground Zero[WIP]</a>
+                                                                                        </div>
+                                    <div id="map-info-table">
+                        <div class="info-item"><i class="map-info-icon icon ion-md-time"></i>50 minutes</div>
+                        <div class="info-item"><i class="map-info-icon icon ion-md-person"></i>10-12  Players</div>
+                    </div>
+                            </div>
+            </nav>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Left Sidebar -->
+    <div id="left-sidebar" class="sidebar hidden-sm-down footer-large">
+        <div class="sidebar-close">
+            <div class="left-arrow"></div>
+        </div>
+
+        <div class="panel">
+                            <a href="https://mapgenie.io/tarkov" class="no-style sidebar-logo-link">
+                    <img id="logo-sidebar" src="https://cdn.mapgenie.io/images/games/tarkov/logo-512.png" alt="Escape From Tarkov Map"/>
+                </a>
+                                    <h2 class="subtitle">Escape From Tarkov Interactive Map</h2>
+                            
+                            <p class="mb-3 information"><small>0.14 Update: We're working on the new Ground Zero map + changes to Shoreline</small></p>
+            
+            <div class="social">
+            <a class="map-genie-logo" href="https://mapgenie.io" target="_blank">
+            <svg width="72" height="10" viewBox="0 0 782 108" xmlns="http://www.w3.org/2000/svg" style="fill:#FFF">
+                <path d="M92.96 105l.576-72.144h-.432L66.608 105h-17.28L23.552 32.856h-.432L23.696 105H.512V3.048h34.992l23.184 65.376h.576L81.44 3.048h35.568V105H92.96zm114.192 0l-7.92-20.016h-39.456L152.288 105h-26.784L168.272 3.048h23.904L234.512 105h-27.36zm-27.36-74.736l-12.96 34.992h25.632l-12.672-34.992zm140.544 4.176c0 5.952-1.104 10.968-3.312 15.048-2.208 4.08-5.184 7.368-8.928 9.864-3.744 2.496-8.064 4.32-12.96 5.472-4.896 1.152-9.984 1.728-15.264 1.728h-12.24V105h-24.624V3.048h37.44c5.568 0 10.776.552 15.624 1.656 4.848 1.104 9.072 2.88 12.672 5.328 3.6 2.448 6.432 5.664 8.496 9.648s3.096 8.904 3.096 14.76zm-24.624.144c0-2.4-.48-4.368-1.44-5.904-.96-1.536-2.256-2.736-3.888-3.6-1.632-.864-3.48-1.44-5.544-1.728a46.336 46.336 0 00-6.408-.432h-10.8v24.048H278c2.304 0 4.512-.192 6.624-.576 2.112-.384 4.008-1.056 5.688-2.016 1.68-.96 3-2.232 3.96-3.816.96-1.584 1.44-3.576 1.44-5.976zM451.52 21.336c-3.552-3.744-7.776-6.648-12.672-8.712-4.896-2.064-10.512-3.096-16.848-3.096-6.528 0-12.408 1.2-17.64 3.6-5.232 2.4-9.672 5.64-13.32 9.72-3.648 4.08-6.456 8.808-8.424 14.184-1.968 5.376-2.952 11.04-2.952 16.992 0 5.952.984 11.616 2.952 16.992 1.968 5.376 4.776 10.08 8.424 14.112 3.648 4.032 8.088 7.248 13.32 9.648 5.232 2.4 11.112 3.6 17.64 3.6 5.76 0 11.04-.624 15.84-1.872 4.8-1.248 8.688-2.832 11.664-4.752v-30.96h-23.76V51.72h34.128v45.936c-5.568 3.36-11.568 5.856-18 7.488-6.432 1.632-13.104 2.448-20.016 2.448-7.68 0-14.784-1.344-21.312-4.032-6.528-2.688-12.144-6.408-16.848-11.16-4.704-4.752-8.376-10.392-11.016-16.92-2.64-6.528-3.96-13.68-3.96-21.456s1.344-14.928 4.032-21.456c2.688-6.528 6.408-12.168 11.16-16.92 4.752-4.752 10.368-8.472 16.848-11.16C407.24 1.8 414.272.456 421.856.456c8.16 0 15.264 1.2 21.312 3.6 6.048 2.4 11.232 5.76 15.552 10.08l-7.2 7.2zm45.216 74.448h54.576V105h-64.944V3.048h63.216v9.216h-52.848V47.4h49.392v9.072h-49.392v39.312zm147.168-5.904h.288V3.048h10.368V105H641.6l-59.328-87.696h-.288V105h-10.368V3.048h12.96l59.328 86.832zM692 105h-10.368V3.048H692V105zm37.44-9.216h54.576V105h-64.944V3.048h63.216v9.216H729.44V47.4h49.392v9.072H729.44v39.312z"/>
+            </svg>
+        </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Fground-zero" target="_blank" title="Facebook" class="social-item social-facebook">
+            <svg style="display:block;fill:#fff;height:44%;margin:28% auto;" viewBox="0 -256 864 1664">
+                <path transform="matrix(1,0,0,-1,-95,1280)" d="M 959,1524 V 1260 H 802 q -86,0 -116,-36 -30,-36 -30,-108 V 927 H 949 L 910,631 H 656 V -128 H 350 V 631 H 95 v 296 h 255 v 218 q 0,186 104,288.5 104,102.5 277,102.5 147,0 228,-12 z"/>
+            </svg>
+        </a>
+        <a href="https://twitter.com/share?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Fground-zero&text=Escape+From+Tarkov+interactive+map+by+%40MapGenie+%23EscapeFromTarkov+%23EFT" target="_blank" title="Twitter" class="social-item social-twitter">
+            <svg style="display:block;fill:#fff;height:36%;margin:32% auto;" viewBox="0 -256 1576 1280">
+                <path transform="matrix(1,0,0,-1,-44,1024)"
+                      d="m 1620,1128 q -67,-98 -162,-167 1,-14 1,-42 0,-130 -38,-259.5 Q 1383,530 1305.5,411 1228,292 1121,200.5 1014,109 863,54.5 712,0 540,0 269,0 44,145 q 35,-4 78,-4 225,0 401,138 -105,2 -188,64.5 -83,62.5 -114,159.5 33,-5 61,-5 43,0 85,11 Q 255,532 181.5,620.5 108,709 108,826 v 4 q 68,-38 146,-41 -66,44 -105,115 -39,71 -39,154 0,88 44,163 Q 275,1072 448.5,982.5 622,893 820,883 q -8,38 -8,74 0,134 94.5,228.5 94.5,94.5 228.5,94.5 140,0 236,-102 109,21 205,78 -37,-115 -142,-178 93,10 186,50 z"/>
+            </svg>
+        </a>
+        <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Fground-zero&title=Map+Genie+%7C+Awesome+Interactive+Game+Maps" target="_blank" title="Reddit" class="social-item social-reddit">
+            <svg style="display:block;fill:#fff;height:46%;margin:26% auto;" viewBox="0 -256 1792 1692">
+                <path transform="matrix(1,0,0,-1,0,1280)"
+                      d="m 1792,690 q 0,-58 -29,-105.5 -30,-47.5 -80,-72.5 12,-46 12,-96 0,-155 -106,-287 Q 1482,-3 1298,-79.5 1114,-156 898,-156 682,-156 498.5,-79.5 315,-3 208.5,129 102,261 102,416 q 0,47 11,94 Q 62,535 31,583.5 0,632 0,690 q 0,82 58,140.5 58,58.5 141,58.5 85,0 145,-63 218,152 515,162 l 116,521 q 3,13 15,21 12,8 26,5 l 369,-81 q 18,37 54,60 36,22 79,22 62,0 106,-43 44,-44 44,-106 0,-62 -44,-106 -44,-44 -106,-44 -62,0 -105,44 -44,43 -44,105 l -334,74 -104,-472 q 300,-9 519,-160 58,61 143,61 83,0 141,-58.5 58,-58.5 58,-140.5 z M 418,491 q 0,-62 43.5,-106 43.5,-44 105.5,-44 62,0 106,44 44,44 44,106 0,62 -44,105.5 Q 629,640 567,640 506,640 462,596 418,552 418,491 z m 810,-355 q 11,11 11,26 0,15 -11,26 -10,10 -25,10 -15,0 -26,-10 -41,-42 -121,-62 -80,-20 -160,-20 -80,0 -160,20 -80,20 -121,62 -11,10 -26,10 -15,0 -25,-10 Q 553,178 553,162.5 553,147 564,136 607,93 682.5,68 758,43 805,38.5 852,34 896,34 q 44,0 91,4.5 47,4.5 123,29.5 75,25 118,68 z m -3,205 q 62,0 106,44 43,44 43,106 0,61 -44,105 -44,44 -105,44 -62,0 -106,-43.5 -44,-43.5 -44,-105.5 0,-62 44,-106 44,-44 106,-44 z"/>
+            </svg>
+        </a>
+        <a href="whatsapp://send?text=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Fground-zero" title="WhatsApp" class="social-item social-whatsapp">
+            <svg style="display:block;fill:#fff;height:44%;margin:28% auto;" viewBox="0 -256 1536 1548">
+                <path transform="matrix(1,0,0,-1,0,1158)"
+                      d="m 985,562 q 13,0 98,-44 84,-44 89,-53 2,-5 2,-15 0,-33 -17,-76 -16,-39 -71,-65.5 -55,-26.5 -102,-26.5 -57,0 -190,62 -98,45 -170,118 -72,73 -148,185 -72,107 -71,194 v 8 q 3,91 74,158 24,22 52,22 6,0 18,-1 12,-2 19,-2 19,0 26.5,-6 7.5,-7 15.5,-28 8,-20 33,-88 25,-68 25,-75 0,-21 -34.5,-57.5 Q 599,735 599,725 q 0,-7 5,-15 34,-73 102,-137 56,-53 151,-101 12,-7 22,-7 15,0 54,48.5 39,48.5 52,48.5 z M 782,32 q 127,0 244,50 116,50 200,134 84,84 134,200.5 50,116.5 50,243.5 0,127 -50,243.5 -50,116.5 -134,200.5 -84,84 -200,134 -117,50 -244,50 -127,0 -243.5,-50 Q 422,1188 338,1104 254,1020 204,903.5 154,787 154,660 154,457 274,292 L 195,59 437,136 Q 595,32 782,32 z m 0,1382 q 153,0 293,-60 139,-60 240,-161 101,-101 161,-240.5 Q 1536,813 1536,660 1536,507 1476,367.5 1416,228 1315,127 1214,26 1075,-34 935,-94 782,-94 587,-94 417,0 L 0,-134 136,271 Q 28,449 28,660 q 0,153 60,292.5 60,139.5 161,240.5 101,101 240.5,161 139.5,60 292.5,60 z"/>
+            </svg>
+        </a>
+        <a href="https://vk.com/share.php?url=https%3A%2F%2Fmapgenie.io%2Ftarkov%2Fmaps%2Fground-zero" target="_blank" title="VK" class="social-item social-vk">
+            <svg style="display:block;fill:#fff;height:32%;margin:34% auto;" viewBox="-1 -256 1921 1096">
+                <path transform="matrix(1,0,0,-1,0,839.1)"
+                      d="m 1917,1016 q 23,-64 -150,-294 -24,-32 -65,-85 -40,-51 -55,-72 -15,-21 -30,-49.5 -16,-28.5 -12,-42 3,-13.5 13,-34.5 9,-21 32,-43 23,-22 57,-53 4,-2 5,-4 141,-131 191,-221 3,-5 7,-12.5 3,-7.5 7,-26.5 3,-19 -1,-34 -4,-15 -25,-27.5 Q 1870,5 1832,5 L 1576,1 q -24,-5 -56,5 -32,10 -52,22 l -20,12 q -30,21 -70,64 -40,43 -68,77.5 -29,34.5 -61,58 -33,23.5 -57,15.5 -3,-1 -8,-3.5 -5,-2.5 -17,-14.5 -12,-12 -21,-29.5 -10,-17.5 -17,-52 -8,-34.5 -7,-77.5 0,-15 -3,-27.5 -4,-12.5 -8,-18.5 l -4,-5 Q 1089,8 1054,5 H 939 Q 868,1 793,21.5 718,42 661.5,74.5 605,107 558.5,140.5 512,174 488,198 l -25,24 Q 453,232 435.5,252 418,272 364,343 310,414 258,494 206,574 135.5,705 65,836 5,977 q -6,16 -6,27 0,11 3,16 l 4,6 q 15,19 57,19 l 274,2 q 12,-2 23,-6 11,-5 16,-9 l 5,-3 q 16,-11 24,-32 20,-50 46,-103.5 26,-53.5 41,-81.5 l 16,-29 q 29,-60 56,-104 27,-44 48.5,-68.5 Q 634,586 654,572 q 20,-14 34,-14 14,0 27,5 2,1 5,5 3,4 12,22 9,18 13.5,47 4.5,29 9.5,81 5,52 0,125 -2,40 -9,73 -7,33 -14,46 l -6,12 q -25,34 -85,43 -13,2 5,24 16,19 38,30 53,26 239,24 82,-1 135,-13 20,-5 34,-13 13,-9 20,-24 7,-16 11,-32 3,-17 3,-46 0,-29 -1,-55 -1,-26 -2,-70.5 -2,-44.5 -2,-82.5 0,-11 -1,-42 -1,-31 0,-48 0,-17 3,-40.5 3,-23.5 12,-39 8,-15.5 22,-24.5 8,-2 17,-4 9,-2 26,11 17,13 38,34.5 21,21.5 52,67 31,45.5 68,107.5 60,104 107,225 4,10 10,18 6,7 11,10 l 4,3 5,3 q 0,0 13,3 13,3 20,0 l 288,2 q 39,5 64,-2 25,-8 31,-17 z"/>
+            </svg>
+        </a>
+
+            
+
+    </div>
+                            <hr/>
+                <div class="tools-panel">
+                                                                        <a class="tool" href="https://mapgenie.io/tarkov/guides/keys-14" target="_blank">Key Tool</a>
+                                                                                                <a class="tool" href="https://mapgenie.io/tarkov/guides/quests-17" target="_blank">Quest Tool</a>
+                                                            </div>
+            
+                            <hr/>
+
+                <div class="map-switcher-panel">
+                                                                                                        <a class="map-link " href="https://mapgenie.io/tarkov/maps/factory">Factory</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/woods">Woods</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/customs">Customs</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/interchange">Interchange</a>
+                                                                                                                                                                                                <a class="map-link " href="https://mapgenie.io/tarkov/maps/reserve">Reserve[WIP]</a>
+                                                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/shoreline">Shoreline</a>
+                                                                                                                                                            <a class="map-link " href="https://mapgenie.io/tarkov/maps/lab">The Lab</a>
+                                                                                                                                                                                                <a class="map-link " href="https://mapgenie.io/tarkov/maps/lighthouse">Lighthouse[WIP]</a>
+                                                                                                                                                                                                                                <a class="map-link " href="https://mapgenie.io/tarkov/maps/streets">Streets[WIP]</a>
+                                                                                                                                                                                                                                <a class="map-link selected" href="https://mapgenie.io/tarkov/maps/ground-zero">Ground Zero[WIP]</a>
+                                                                                                                        </div>
+                                    <hr/>
+                    <div id="map-info-table">
+                        <div class="info-item"><i class="map-info-icon icon ion-md-time"></i>50 minutes</div>
+                        <div class="info-item"><i class="map-info-icon icon ion-md-person"></i>10-12  Players</div>
+                    </div>
+                            
+            <hr/>
+            
+            <div id="left-sidebar-buttons-container">
+                <div class="button-panel" id="left-sidebar-buttons">
+                    <span id="tutorial-button">?</span>
+                    <span id="show-all">Show All</span>
+                    <span id="hide-all">Hide All</span>
+                    
+                                    </div>
+            </div>
+            <hr/>
+
+            <div id="sidebar-categories-wrapper">
+
+                <div id="left-sidebar-search-container">
+                    <div id="search-wrapper">
+                        <div id="search-input-wrapper" class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button id="search-close" class="btn btn-outline-secondary d-none" type="button">X</button>
+                            </div>
+
+                            <input id="search-input" type="text" class="form-control" placeholder='Search... ' autocomplete="off">
+                            <div class="input-group-append">
+                                <button id="search-submit" class="btn btn-outline-secondary" type="button">Search</button>
+                            </div>
+                        </div>
+
+                        <div id="search-results-wrapper" class="not-shown"></div>
+                    </div>
+                </div>
+
+                <div id="categories-wrapper">
+                    <ul id="categories">
+                                                    <div class="header">Loot</div>
+
+                            <div class="group-categories">
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-crate"></span>
+                                        <span class="title">Crate</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-dead_scav"></span>
+                                        <span class="title">Dead Scav</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-duffle_bag"></span>
+                                        <span class="title">Duffle Bag</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-grenade"></span>
+                                        <span class="title">Grenade</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-clothes"></span>
+                                        <span class="title">Jacket</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-key"></span>
+                                        <span class="title">Key</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-loose_loot"></span>
+                                        <span class="title">Loose Loot</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-meds"></span>
+                                        <span class="title">Meds</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-other_loot"></span>
+                                        <span class="title">Other Loot</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-pc_block"></span>
+                                        <span class="title">PC Block</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-provisions"></span>
+                                        <span class="title">Provisions</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-safe"></span>
+                                        <span class="title">Safe</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-toolbox"></span>
+                                        <span class="title">Toolbox</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-valuable"></span>
+                                        <span class="title">Valuable</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                            </div>
+                                                    <div class="header">Enemies</div>
+
+                            <div class="group-categories">
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-scav_sniper"></span>
+                                        <span class="title">Scav Sniper</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                            </div>
+                                                    <div class="header">Locations</div>
+
+                            <div class="group-categories">
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-weapon_emplacement"></span>
+                                        <span class="title">Emplacement</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-exit"></span>
+                                        <span class="title">Extraction</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-location"></span>
+                                        <span class="title">Location</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-locked_door"></span>
+                                        <span class="title">Locked Door</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-miscellaneous"></span>
+                                        <span class="title">Miscellaneous</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-quest_item"></span>
+                                        <span class="title">Quest Item</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-spawn_point"></span>
+                                        <span class="title">Spawn Point</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                                        
+                                    <div class="category-item category-visible">
+                                        <span class="icon icon-transition"></span>
+                                        <span class="title">Transition</span>
+                                        <span class="bubble">0</span>
+                                    </div>
+                                                            </div>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="blobby-left" class="text-center pogo">
+            <div id="blobby-left-inner" data-pogo="sidebar">
+            </div>
+            <div class="text-center mb-1 mt-1">
+                Ad Blocker? Consider an <b>upgrade to PRO</b> to remove ads and get extra features.
+            </div>
+            <a href=https://mapgenie.io/tarkov/upgrade target="_blank">
+                <button id="button-upgrade" class="btn btn-outline-secondary btn-upgrade">
+                    Upgrade To Pro
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Right Sidebar -->
+    <div id="right-sidebar" class="sidebar hidden-sm-down">
+        <div class="sidebar-close">
+            <div class="right-arrow"></div>
+        </div>
+
+        <div id="user-panel-wrapper">
+
+        </div>
+    </div>
+
+    <!-- Checklist -->
+    <div id="checklist-sidebar" class="sidebar closed hidden-sm-down">
+    </div>
+
+    <div id="dialogs"></div>
+
+    <div id="editor-controls-overlay"></div>
+
+    <div id="multi-location-modal"></div>
+
+    <div id="location-features-modal"></div>
+
+    <div id="select-location-modal"></div>
+
+    <div id="quick-jump-modal">
+        <div id="quick-jump-content">
+            <span id="quick-jump-icon"></span>
+            <input id="quick-jump-input" class="autocomplete" autocomplete="off">
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+
+    <div id="marker-tooltip">
+        <div id="marker-tooltip-title"></div>
+    </div>
+
+    <div id="map-context-menu"></div>
+
+    <div id="region-filter-notification" class="tool-info-panel center-top">
+        <div><small>Filter Active</small></div>
+        <div id="region-filter-region-title" class="tool-info-title">region_name</div>
+    </div>
+
+    <div id="distance-info-panel" class="tool-info-panel">
+        <div class="tool-info-title">Distance Measurement Tool</div>
+        <div id="distance-info" class="tool-info"></div>
+    </div>
+
+    <div id="radius-info-panel" class="tool-info-panel">
+        <div class="tool-info-title">Sniping Radius Tool</div>
+        <div id="radius-info" class="tool-info">Drag the target shape to visualize sniping distances. Dotted lines are 50m increments.</div>
+        <button id="radius-clear-button" class="btn btn-link tool-info">Clear Target</button>
+    </div>
+
+    <!-- Embedded -->
+            <div id="blobby-overlay" data-pogo="sticky"></div>
+
+        
+    
+    
+
+    
+    
+    
+
+
+        <script>window.mapUrl = "https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero";window.baseUrl = "https:\/\/mapgenie.io\/tarkov";window.cdnUrl = "https:\/\/cdn.mapgenie.io";window.tilesCdnUrl = "https:\/\/tiles.mapgenie.io";window.storageCdnUrl = "https:\/\/storage-cdn.mapgenie.io";window.user = {"id":973471,"role":"user","locations":[],"gameLocationsCount":155,"hasPro":true,"trackedCategoryIds":[],"suggestions":[],"presets":[{"id":169694,"game_id":20,"title":"Extracts + PMC Spawns","categories":[953,954],"order":0,"is_demo_preset":true}]};window.mapData = {"maps":[{"id":68,"title":"Factory","slug":"factory"},{"id":69,"title":"Woods","slug":"woods"},{"id":67,"title":"Customs","slug":"customs"},{"id":66,"title":"Interchange","slug":"interchange"},{"id":75,"title":"Reserve","slug":"reserve"},{"id":72,"title":"Shoreline","slug":"shoreline"},{"id":74,"title":"The Lab","slug":"lab"},{"id":71,"title":"Lighthouse","slug":"lighthouse"},{"id":64,"title":"Streets","slug":"streets"},{"id":577,"title":"Ground Zero","slug":"ground-zero"}],"map":{"id":577,"title":"Ground Zero","slug":"ground-zero"},"groups":[{"id":200,"game_id":20,"title":"Loot","order":10,"color":"386150","expandable":false,"categories":[{"id":941,"group_id":200,"title":"Crate","icon":"crate","info":"**Note:** With the 0.13.5 update - weapon containers that were previously static spawns now have random a chance to appear in fixed locations.","template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":959,"group_id":200,"title":"Dead Scav","icon":"dead_scav","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":969,"group_id":200,"title":"Duffle Bag","icon":"duffle_bag","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":942,"group_id":200,"title":"Grenade","icon":"grenade","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":961,"group_id":200,"title":"Jacket","icon":"clothes","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":947,"group_id":200,"title":"Key","icon":"key","info":null,"template":"**Unlocks:** ??  \n**Location:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":946,"group_id":200,"title":"Loose Loot","icon":"loose_loot","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":943,"group_id":200,"title":"Meds","icon":"meds","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":949,"group_id":200,"title":"Other Loot","icon":"other_loot","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":968,"group_id":200,"title":"PC Block","icon":"pc_block","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":1016,"group_id":200,"title":"Provisions","icon":"provisions","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":944,"group_id":200,"title":"Safe","icon":"safe","info":null,"template":"**Location:** ??  \n**Key Required:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":970,"group_id":200,"title":"Toolbox","icon":"toolbox","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":1013,"group_id":200,"title":"Valuable","icon":"valuable","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"}]},{"id":201,"game_id":20,"title":"Enemies","order":10,"color":"9c3443","expandable":false,"categories":[{"id":1011,"group_id":201,"title":"Scav Sniper","icon":"scav_sniper","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"}]},{"id":202,"game_id":20,"title":"Locations","order":10,"color":"453A49","expandable":false,"categories":[{"id":4739,"group_id":202,"title":"Emplacement","icon":"weapon_emplacement","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":954,"group_id":202,"title":"Extraction","icon":"exit","info":null,"template":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"text|marker"},{"id":952,"group_id":202,"title":"Location","icon":"location","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"text"},{"id":957,"group_id":202,"title":"Locked Door","icon":"locked_door","info":null,"template":"**Key Required:** ??  \n**Behind the Lock:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":956,"group_id":202,"title":"Miscellaneous","icon":"miscellaneous","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":955,"group_id":202,"title":"Quest Item","icon":"quest_item","info":null,"template":"**Quest:** ??  \n**Quest Giver:** ??  \n**Requirements:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":953,"group_id":202,"title":"Spawn Point","icon":"spawn_point","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},{"id":972,"group_id":202,"title":"Transition","icon":"transition","info":null,"template":"**Transition:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"}]}],"categories":{"941":{"id":941,"group_id":200,"title":"Crate","icon":"crate","info":"**Note:** With the 0.13.5 update - weapon containers that were previously static spawns now have random a chance to appear in fixed locations.","template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"959":{"id":959,"group_id":200,"title":"Dead Scav","icon":"dead_scav","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"969":{"id":969,"group_id":200,"title":"Duffle Bag","icon":"duffle_bag","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"942":{"id":942,"group_id":200,"title":"Grenade","icon":"grenade","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"961":{"id":961,"group_id":200,"title":"Jacket","icon":"clothes","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"947":{"id":947,"group_id":200,"title":"Key","icon":"key","info":null,"template":"**Unlocks:** ??  \n**Location:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"946":{"id":946,"group_id":200,"title":"Loose Loot","icon":"loose_loot","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"943":{"id":943,"group_id":200,"title":"Meds","icon":"meds","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"949":{"id":949,"group_id":200,"title":"Other Loot","icon":"other_loot","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"968":{"id":968,"group_id":200,"title":"PC Block","icon":"pc_block","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"1016":{"id":1016,"group_id":200,"title":"Provisions","icon":"provisions","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"944":{"id":944,"group_id":200,"title":"Safe","icon":"safe","info":null,"template":"**Location:** ??  \n**Key Required:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"970":{"id":970,"group_id":200,"title":"Toolbox","icon":"toolbox","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"1013":{"id":1013,"group_id":200,"title":"Valuable","icon":"valuable","info":null,"template":"**Possible Spawns:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"1011":{"id":1011,"group_id":201,"title":"Scav Sniper","icon":"scav_sniper","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"4739":{"id":4739,"group_id":202,"title":"Emplacement","icon":"weapon_emplacement","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"954":{"id":954,"group_id":202,"title":"Extraction","icon":"exit","info":null,"template":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** -","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"text|marker"},"952":{"id":952,"group_id":202,"title":"Location","icon":"location","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"text"},"957":{"id":957,"group_id":202,"title":"Locked Door","icon":"locked_door","info":null,"template":"**Key Required:** ??  \n**Behind the Lock:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"956":{"id":956,"group_id":202,"title":"Miscellaneous","icon":"miscellaneous","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"955":{"id":955,"group_id":202,"title":"Quest Item","icon":"quest_item","info":null,"template":"**Quest:** ??  \n**Quest Giver:** ??  \n**Requirements:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"953":{"id":953,"group_id":202,"title":"Spawn Point","icon":"spawn_point","info":null,"template":null,"order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"},"972":{"id":972,"group_id":202,"title":"Transition","icon":"transition","info":null,"template":"**Transition:** ??","order":1,"has_heatmap":false,"features_enabled":false,"ign_enabled":true,"ign_visible":true,"visible":true,"description":null,"premium":false,"display_type":"marker"}},"regions":[],"locations":[{"id":314897,"map_id":577,"region_id":null,"category_id":941,"title":"Wooden Crate","description":null,"latitude":"0.52354640568856","longitude":"-0.76504618851069","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314980,"map_id":577,"region_id":null,"category_id":941,"title":"Technical Supply Crate","description":null,"latitude":"0.53082827514112","longitude":"-0.77636875793954","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315715,"map_id":577,"region_id":null,"category_id":941,"title":"Wood Crate","description":null,"latitude":"0.56888910895137","longitude":"-0.59441839662662","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315716,"map_id":577,"region_id":null,"category_id":941,"title":"Wood Crate","description":null,"latitude":"0.56665762061971","longitude":"-0.60677801576708","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315718,"map_id":577,"region_id":null,"category_id":941,"title":"Wooden Crate","description":"**Location:** In the bed of the truck","latitude":"0.56209558994179","longitude":"-0.59479125308235","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314860,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":null,"latitude":"0.82212448769518","longitude":"-0.82518600850938","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44538,"title":"","file_name":"cb613729-eeb8-481a-b3ef-cf87bcb6f1d6.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/cb613729-eeb8-481a-b3ef-cf87bcb6f1d6.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314879,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Driver","description":null,"latitude":"0.74130759069070","longitude":"-0.83810882092229","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314880,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.79827866221075","longitude":"-0.83760110416915","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314881,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.80293848724207","longitude":"-0.81359721262373","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314882,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.81113991435575","longitude":"-0.77351139366669","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314887,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"**Location:** Propped up against the white car","latitude":"0.79069657681023","longitude":"-0.73982902726974","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44542,"title":"","file_name":"e56e3384-683a-4d27-87ce-9c582e13322f.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/e56e3384-683a-4d27-87ce-9c582e13322f.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314888,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.77286493296155","longitude":"-0.73529257406784","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44543,"title":"","file_name":"79aa5026-b2b4-4e77-8268-1a51504b202e.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/79aa5026-b2b4-4e77-8268-1a51504b202e.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314889,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.77681278360258","longitude":"-0.71297659506365","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44544,"title":"","file_name":"68acf77f-ab73-4c19-b9fe-3cad6cac62de.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/68acf77f-ab73-4c19-b9fe-3cad6cac62de.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314890,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.68227011343188","longitude":"-0.75194539831938","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44545,"title":"","file_name":"938c1c58-a1e0-4a74-b64d-d62a88639213.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/938c1c58-a1e0-4a74-b64d-d62a88639213.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314891,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.76952408223339","longitude":"-0.68502805731882","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44546,"title":"","file_name":"fbeb4673-8b84-4f4d-9573-36c3c234c58d.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/fbeb4673-8b84-4f4d-9573-36c3c234c58d.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314892,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** ??","latitude":"0.79653681811425","longitude":"-0.67592358512258","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314899,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"Inside med tent behind medical blind","latitude":"0.68287100440914","longitude":"-0.87079467453555","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314900,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"Next to extract","latitude":"0.66537967266832","longitude":"-0.88557895084674","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314903,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"**Location:** Next to black SUV","latitude":"0.75403915806267","longitude":"-0.88561833200885","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314913,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** Behind sand bags","latitude":"0.69308596311518","longitude":"-0.73807531497189","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314915,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** Outside - on the flight of stairs","latitude":"0.69454875919955","longitude":"-0.69955219364240","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314916,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** On top of the overturned van\n\n**Note:** 2 dead bodies next to each other","latitude":"0.80414015772265","longitude":"-0.62776569482761","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314917,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** On top of the overturned van\n\n**Note:** 2 dead bodies next to each other","latitude":"0.80705811267620","longitude":"-0.62398914453464","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314918,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":null,"latitude":"0.85886641223631","longitude":"-0.59129734635653","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314919,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"**Location:** Inside the lobby","latitude":"0.88227016371061","longitude":"-0.57715594738710","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314977,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"in the white container","latitude":"0.54714641386656","longitude":"-0.58230692008186","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314981,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.53258031761305","longitude":"-0.77561785026080","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314983,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":null,"latitude":"0.58589222126827","longitude":"-0.79464084476794","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315213,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"**Location:** On the staircase","latitude":"0.72559727009288","longitude":"-0.82204369375640","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315312,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"**Location:** On the stairs, next to another Dead Scav","latitude":"0.66640305157120","longitude":"-0.76093816170279","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315313,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"**Location:** On the stairs, next to another Dead Scav","latitude":"0.67172419143675","longitude":"-0.76299809822622","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315720,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Body","description":"**Location:** Next to the black car","latitude":"0.76566452677982","longitude":"-0.75913356805651","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44577,"title":"","file_name":"87136c2e-1737-40a8-86fc-6e0bd67be66a.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/87136c2e-1737-40a8-86fc-6e0bd67be66a.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":315980,"map_id":577,"region_id":null,"category_id":959,"title":"Dead PMC","description":"At the end of the floor, behind the steel panel.","latitude":"0.87072454421819","longitude":"-0.80908702024237","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44611,"title":"","file_name":"23c3d25f-6f07-40da-b343-5a5392a7c281.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/23c3d25f-6f07-40da-b343-5a5392a7c281.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":315981,"map_id":577,"region_id":null,"category_id":959,"title":"Dead Scav","description":"Behind the Coffee shop","latitude":"0.81920802175269","longitude":"-0.77150738906320","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44612,"title":"","file_name":"45d50ed9-3bc7-4e95-b929-7be1ae0e29c6.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/45d50ed9-3bc7-4e95-b929-7be1ae0e29c6.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314956,"map_id":577,"region_id":null,"category_id":969,"title":"Duffle Bag","description":"On yellow couch","latitude":"0.73095363635318","longitude":"-0.74375751324999","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314979,"map_id":577,"region_id":null,"category_id":969,"title":"Duffle Bag","description":null,"latitude":"0.53107856695378","longitude":"-0.77286452210853","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314982,"map_id":577,"region_id":null,"category_id":969,"title":"Duffle Bag","description":null,"latitude":"0.58689337907040","longitude":"-0.79889598827509","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315211,"map_id":577,"region_id":null,"category_id":969,"title":"Duffel Bag","description":"On a box next to the police car","latitude":"0.67003988934749","longitude":"-0.74867052519130","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315717,"map_id":577,"region_id":null,"category_id":969,"title":"Duffle Bag","description":null,"latitude":"0.57514227976159","longitude":"-0.60120109186695","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315979,"map_id":577,"region_id":null,"category_id":969,"title":"Duffle Bag","description":"On the couch","latitude":"0.86866484499865","longitude":"-0.82453654416926","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44610,"title":"","file_name":"45455c76-a72a-48b0-95b6-5cc8e7793620.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/45455c76-a72a-48b0-95b6-5cc8e7793620.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":316000,"map_id":577,"region_id":null,"category_id":969,"title":"Duffel Bag","description":"**Location:** On the truck","latitude":"0.54268204751662","longitude":"-0.66482545392858","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314912,"map_id":577,"region_id":null,"category_id":942,"title":"Grenade Box","description":"**Location:** Outside - on a green box","latitude":"0.68997768968886","longitude":"-0.73891309446816","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314978,"map_id":577,"region_id":null,"category_id":961,"title":"Jacket","description":null,"latitude":"0.53290924714022","longitude":"-0.72134409712132","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315314,"map_id":577,"region_id":null,"category_id":947,"title":"TerraGroup Science Office Key","description":"**Unlocks:** [TerraGroup Science Office](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=314961)  \n**Location:** Found on the body of the Lab Scientist. Ground floor, by the elevators the debris.\n\n**Note:** Only has a chance to spawn here","latitude":"0.87741855889854","longitude":"-0.83134117016090","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314908,"map_id":577,"region_id":null,"category_id":946,"title":"Loose electronics","description":"**Location:** On the circle coffee table","latitude":"0.68208183238043","longitude":"-0.69393781370627","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314910,"map_id":577,"region_id":null,"category_id":946,"title":"Loose Ammo","description":"**Location:** on a bench","latitude":"0.67138921231329","longitude":"-0.71427469895843","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314901,"map_id":577,"region_id":null,"category_id":943,"title":"Medbag SMU06","description":"**Location:** Sitting on table next to operating table","latitude":"0.68134962857810","longitude":"-0.87544677369061","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315173,"map_id":577,"region_id":null,"category_id":943,"title":"Medbag SMU06","description":"**Location:** Behind the tent out side on the ground","latitude":"0.67493857744768","longitude":"-0.86885812859137","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315210,"map_id":577,"region_id":null,"category_id":949,"title":"Green Flare","description":"**Location:** The Dead Scav in this location seems to always have a Green Flare (required for the extract)","latitude":"0.65134329746347","longitude":"-0.75319424838852","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314909,"map_id":577,"region_id":null,"category_id":968,"title":"PC Block","description":"**Location:** Behind the desk","latitude":"0.68602976266328","longitude":"-0.69342282957606","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314957,"map_id":577,"region_id":null,"category_id":968,"title":"PC Block","description":"On cardboard boxes","latitude":"0.73267011010296","longitude":"-0.73929431744881","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314958,"map_id":577,"region_id":null,"category_id":968,"title":"PC Block","description":"**Location:** Behind desk","latitude":"0.73902105724606","longitude":"-0.73551776715615","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314911,"map_id":577,"region_id":null,"category_id":1016,"title":"Loose Provisions","description":"**Location:** On a bench","latitude":"0.67329100026681","longitude":"-0.72296918535264","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314907,"map_id":577,"region_id":null,"category_id":944,"title":"Safe","description":"**Location:** Outside tower next to a sofa","latitude":"0.68345502589008","longitude":"-0.69754270262254","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315209,"map_id":577,"region_id":null,"category_id":944,"title":"Safe","description":"**Location:** On the stairs","latitude":"0.51940286241026","longitude":"-0.75446570831494","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314905,"map_id":577,"region_id":null,"category_id":970,"title":"Toolbox","description":"**Location:** Next to some boxes","latitude":"0.68240488682787","longitude":"-0.69102603632021","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314914,"map_id":577,"region_id":null,"category_id":970,"title":"Toolbox","description":"**Location:** Next to some sandbags on the roof","latitude":"0.69838847979487","longitude":"-0.74354795164578","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315220,"map_id":577,"region_id":null,"category_id":970,"title":"Toolbox","description":null,"latitude":"0.53170766936010","longitude":"-0.71258936689682","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315221,"map_id":577,"region_id":null,"category_id":970,"title":"Toolbox","description":null,"latitude":"0.53840217114338","longitude":"-0.75165208188287","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314975,"map_id":577,"region_id":null,"category_id":1013,"title":"Loose Valuables","description":"**Location:** In the bathrooms behind a breachable door \n\n**Possible Spawns:** Golden Egg , Roler, Watch","latitude":"0.74419787541973","longitude":"-0.69847501336940","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315175,"map_id":577,"region_id":null,"category_id":1013,"title":"Loose Valuable","description":"Gold chain on the bench in the corner at the bottom of the stairs.","latitude":"0.64309089013928","longitude":"-0.84150852511442","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314876,"map_id":577,"region_id":null,"category_id":1011,"title":"Sniper Zone","description":null,"latitude":"0.64339198729306","longitude":"-0.76208836442902","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314894,"map_id":577,"region_id":null,"category_id":1011,"title":"Snipers","description":"Scav Snipers overlook the road near the extraction point.","latitude":"0.92039448740502","longitude":"-0.61799847294935","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314904,"map_id":577,"region_id":null,"category_id":1011,"title":"Sniper Zone","description":"Sniper will kill you if you pass through the checkpoint after the car has left","latitude":"0.92064352260276","longitude":"-0.77893382399972","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314923,"map_id":577,"region_id":null,"category_id":1011,"title":"Sniper","description":null,"latitude":"0.82440718994867","longitude":"-0.92591734813101","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314873,"map_id":577,"region_id":null,"category_id":4739,"title":"AGS Grenade Launcher","description":null,"latitude":"0.78615390660549","longitude":"-0.60569956826015","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314874,"map_id":577,"region_id":null,"category_id":4739,"title":"Utyos Machine Gun","description":null,"latitude":"0.79439286892607","longitude":"-0.72723582314296","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314851,"map_id":577,"region_id":null,"category_id":954,"title":"Police Cordon V-Ex [PMC]","description":"**Always Open:** \u2714  \n**Single Use:** \u2714  \n**Requirements:** \n- 5000 RUB per player (max 4 players)","latitude":"0.87411363354877","longitude":"-0.76521444525045","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314852,"map_id":577,"region_id":null,"category_id":954,"title":"Scav Checkpoint [CO-OP]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** \n- Friendly Scav + PMC","latitude":"0.82681071820180","longitude":"-0.91796840132898","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314853,"map_id":577,"region_id":null,"category_id":954,"title":"Mira Ave [PMC]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** \n- Signal Flare\n\n**Note:** Requires a green flare - shoot it at the west side of intersection near the yellow bus then continue to run west to a long blue bus","latitude":"0.65024181311839","longitude":"-0.73842623362597","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314854,"map_id":577,"region_id":null,"category_id":954,"title":"Nakatani Basement Stairs [ALL]","description":"**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** None\n\n**Location:** Inside the Nakatani building","latitude":"0.89071305150636","longitude":"-0.58584005240825","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314855,"map_id":577,"region_id":null,"category_id":954,"title":"Emercom Checkpoint [ALL]","description":"**Location:** Just outside the front entrance to the Unity Credit Bank building - opposite the Skyside Building\n\n**Always Open:** \u2714  \n**Single Use:** \u2718  \n**Requirements:** None","latitude":"0.67502054699794","longitude":"-0.89065121921581","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314865,"map_id":577,"region_id":null,"category_id":952,"title":"Skyside","description":null,"latitude":"0.69724077257996","longitude":"-0.81787303017225","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314866,"map_id":577,"region_id":null,"category_id":952,"title":"TerraGroup","description":null,"latitude":"0.83993737232207","longitude":"-0.83812907265272","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314867,"map_id":577,"region_id":null,"category_id":952,"title":"Capital Insight","description":null,"latitude":"0.76887657075605","longitude":"-0.56629371779232","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314868,"map_id":577,"region_id":null,"category_id":952,"title":"Nakatani","description":null,"latitude":"0.88241092167821","longitude":"-0.57128958668843","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314869,"map_id":577,"region_id":null,"category_id":952,"title":"Empire","description":null,"latitude":"0.83406221391904","longitude":"-0.69394590938528","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314870,"map_id":577,"region_id":null,"category_id":952,"title":"Fusion","description":null,"latitude":"0.72420910723387","longitude":"-0.71385862911185","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314871,"map_id":577,"region_id":null,"category_id":952,"title":"Elemental Global","description":null,"latitude":"0.66172893917081","longitude":"-0.92053892696341","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314921,"map_id":577,"region_id":null,"category_id":952,"title":"ASAP Winery","description":null,"latitude":"0.72871477303849","longitude":"-0.80590364240718","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315176,"map_id":577,"region_id":null,"category_id":952,"title":"Gagrin Hotel","description":null,"latitude":"0.81452950571540","longitude":"-0.64449214491765","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314920,"map_id":577,"region_id":null,"category_id":957,"title":"Under Ground Parking","description":"**Key Required:** Under Ground Parking Utility Key (Random)  \n\n**Behind the Lock:** \n- Ammo Crate\n- Weapon Crate\n- Dead Scav \n\n**Location:** Adjacent to the down ramp on the Skyside ramp","latitude":"0.73552455496041","longitude":"-0.77382513475411","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314961,"map_id":577,"region_id":null,"category_id":957,"title":"TerraGroup Science Office","description":"**Key Required:** [TerraGroup Science Office Key](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=315314)   \n**Behind the Lock:** \n- [Scientist's Hard Drive](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=314922)\n- Multiple PC Blocks\n- Four filing cabinets\n- Duffle Bag (next to the left PC under the wall opposite from windows, doesn't always spawn)\n\n**Note:** You do not need the key to enter this room. You can enter it through the windows, using the wide windowsill from the next room.","latitude":"0.84568510374567","longitude":"-0.80635768659269","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314976,"map_id":577,"region_id":null,"category_id":957,"title":"Unity Credit Bank Cash Register","description":"**Key Required:** Key - Unity Credit Bank cash register key     \n**Behind the Lock:** \n- 1x Safe\n- 1x Filing Cabinet","latitude":"0.83074910562873","longitude":"-0.67303758641339","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314877,"map_id":577,"region_id":null,"category_id":956,"title":"Minefield","description":null,"latitude":"0.67343914759340","longitude":"-0.65678165074721","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314902,"map_id":577,"region_id":null,"category_id":956,"title":"Mines","description":null,"latitude":"0.71029504568555","longitude":"-0.87527511231365","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314924,"map_id":577,"region_id":null,"category_id":956,"title":"Mines","description":"Mine field in the street","latitude":"0.71052931694332","longitude":"-0.52185948643609","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314974,"map_id":577,"region_id":null,"category_id":956,"title":"Mines","description":null,"latitude":"0.69260643407198","longitude":"-0.61275760581933","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315719,"map_id":577,"region_id":null,"category_id":956,"title":"Map Image","description":"The current map image is a placeholder while we work on a custom map","latitude":"0.98010732790316","longitude":"-0.69768147437100","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315982,"map_id":577,"region_id":null,"category_id":956,"title":"Unagi","description":null,"latitude":"0.76777740318015","longitude":"-0.93591419547670","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315983,"map_id":577,"region_id":null,"category_id":956,"title":"Kostin","description":null,"latitude":"0.73042830782164","longitude":"-0.91321549712202","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315984,"map_id":577,"region_id":null,"category_id":956,"title":"Unity Credit","description":null,"latitude":"0.68015019218161","longitude":"-0.90287178648035","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314858,"map_id":577,"region_id":null,"category_id":955,"title":"Dead Scientist [Saving the Mole]","description":"**Quest:** Saving the Mole  \n**Quest Giver:** Mechanic\n\n**Location:** Ground floor, by the elevators the debris.","latitude":"0.87541923692071","longitude":"-0.83114355571536","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314861,"map_id":577,"region_id":null,"category_id":955,"title":"Utyos Machine Gun [Shooting Cans]","description":"**Quest:** Shooting Cans    \n**Quest Giver:** Prapor  \n\n\n**Location:** Located on the top floor (labeled floor 5) of the Tarbank building pointed at the TerraGroups Parking Lot, it's POV can be seen in the Quest Banner. Internal staircase to reach floor is covered in barbed wire.","latitude":"0.79348780742123","longitude":"-0.72707890466140","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314862,"map_id":577,"region_id":null,"category_id":955,"title":"Medical Tent [First in Line]","description":"**Quest:** First in Line  \n**Quest Giver:** Therapist  \n\n**Requirements:** Enter the medical tent and you will receive the mission completed notification","latitude":"0.68460890408714","longitude":"-0.87350119561347","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44539,"title":"","file_name":"65c42fab-65d8-41e5-80d5-07021f5594c4.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/65c42fab-65d8-41e5-80d5-07021f5594c4.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314864,"map_id":577,"region_id":null,"category_id":955,"title":"AGS Grenade Launcher [Shooting Cans]","description":"**Quest:** Shooting Cans  \n**Quest Giver:** Prapor  \n\n**Location:** Found on the highest available floor of Capital Insight.","latitude":"0.78448317513724","longitude":"-0.60640539082615","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314878,"map_id":577,"region_id":null,"category_id":955,"title":"French Wine Bottle [Luxurious Life]","description":"**Quest:** Luxurious Life  \n**Quest Giver:** Prapor  \n\n**Location:** Inside ASAP Winery.  The bottle can spawn in any display and in the storage room behind the counter","latitude":"0.72768488796156","longitude":"-0.80169408652203","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44541,"title":"","file_name":"0758308e-a758-4c03-a676-c4fec5bbe1fd.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/0758308e-a758-4c03-a676-c4fec5bbe1fd.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":314883,"map_id":577,"region_id":null,"category_id":955,"title":"Hall entrance to TerraGroup from parking lot","description":"**Quest:** Saving the Mole  \n**Quest Giver:** Mechanic  \n**Requirements:** None","latitude":"0.82975156023309","longitude":"-0.88104441689245","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314884,"map_id":577,"region_id":null,"category_id":955,"title":"USEC PMC Group [Saving the Mole]","description":"**Quest:** Saving the Mole  \n**Quest Giver:** Mechanic  \n**Requirements:** Locate the USEC PMC group at the parking lot of the TerraGroup Complex on Ground Zero.\n\n**Location:** Found leaning against a white van","latitude":"0.80271609535684","longitude":"-0.85947292702232","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314922,"map_id":577,"region_id":null,"category_id":955,"title":"Scientist's Hard Drive","description":"**Quest:** Saving the Mole  \n**Quest Giver:** Mechanic   \n**Requirements:** TerraGroup Science Office Key \n\n**Location:** Up the right hand staircase (when entering the front door).  On the 2nd floor, number \"4\" room.  Found on the middle desk's left side. \n\n**Note:** You can enter through the window of Room 3, which doesn't require a key","latitude":"0.84448360481065","longitude":"-0.80911200215732","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314863,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.66377667889371","longitude":"-0.83247698241325","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314872,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.76060300490499","longitude":"-0.70459185423050","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314875,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"Inside parking garage of TerraGroup building, at the back, next to the elevator","latitude":"0.78648577459228","longitude":"-0.88484268017606","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314885,"map_id":577,"region_id":null,"category_id":953,"title":"PMC spawn","description":"In the street by Capital Insight","latitude":"0.70458297193437","longitude":"-0.61337623814021","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314886,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.80435165363859","longitude":"-0.58765239147226","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314893,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"PMC Spawn on second floor of Capital Insight","latitude":"0.74358567940313","longitude":"-0.52810862587492","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314895,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"2nd floor east-most stairwell","latitude":"0.80974678916945","longitude":"-0.54399568598282","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314898,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"Street level - behind Fusion","latitude":"0.69012486884455","longitude":"-0.68538356669507","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314959,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"**Location:** First floor of Empire.","latitude":"0.81241767982263","longitude":"-0.73181127639361","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314960,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"Outside the TerraGroup building","latitude":"0.81941105234129","longitude":"-0.82043391950285","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":314984,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.54927381655001","longitude":"-0.83175963349680","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315171,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":"Above the bridge","latitude":"0.71566343542052","longitude":"-0.76195353991321","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315174,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.66266749737122","longitude":"-0.86773171405335","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315214,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.75460626879563","longitude":"-0.91790553461607","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[{"id":44555,"title":"","file_name":"13f3209e-5458-4247-a68d-a1995e595eb2.png","attribution":"","url":"https:\/\/media.mapgenie.io\/storage\/media\/13f3209e-5458-4247-a68d-a1995e595eb2.png","type":"image","mime_type":"image\/png","meta":null,"order":10}]},{"id":315311,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.49346078987418","longitude":"-0.69794658053493","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315476,"map_id":577,"region_id":null,"category_id":953,"title":"PMC Spawn","description":null,"latitude":"0.56740815615499","longitude":"-0.60382520953638","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315172,"map_id":577,"region_id":null,"category_id":972,"title":"Stairs to Empire Building","description":"**Location:** Behind the double door - the door on the left opens, but the door on the right is unopenable.\n\n**Transition:** To Empire Building - direct to floor 2 to see the Machine gun","latitude":"0.58539172743052","longitude":"-0.61136889625308","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315212,"map_id":577,"region_id":null,"category_id":972,"title":"Ramp To Underground","description":"**Transition:** [To Underground](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=315217)","latitude":"0.70044130932183","longitude":"-0.75387016753695","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315215,"map_id":577,"region_id":null,"category_id":972,"title":"Ramp To Surface","description":"**Transition:** [To Surface](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=315218)","latitude":"0.48703469926346","longitude":"-0.71014229552455","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315216,"map_id":577,"region_id":null,"category_id":972,"title":"Underground Ramp","description":"**Transition:** Ramp leading to above ground area.","latitude":"0.48703469926346","longitude":"-0.71014229552455","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315217,"map_id":577,"region_id":null,"category_id":972,"title":"Ramp To Surface","description":"**Transition:** [To Surface](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=315212)","latitude":"0.48753150065474","longitude":"-0.68604655663199","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315218,"map_id":577,"region_id":null,"category_id":972,"title":"Ramp To Underground","description":"**Transition:** [To Underground](https:\/\/mapgenie.io\/tarkov\/maps\/ground-zero?locationIds=315215)","latitude":"0.69756572401732","longitude":"-0.76067682388589","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315219,"map_id":577,"region_id":null,"category_id":972,"title":"Stairs to Skyside","description":"**Transition:** ??","latitude":"0.51810308857806","longitude":"-0.75549072041659","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]},{"id":315478,"map_id":577,"region_id":null,"category_id":972,"title":"Stairs to Fusion","description":"**Transition:** ??","latitude":"0.52622970707252","longitude":"-0.57948783810301","features":null,"ign_marker_id":null,"ign_page_id":null,"tags":[],"media":[]}],"heatmapGroups":[],"heatmapCategories":[],"routes":[],"notes":[],"sharedNotes":{},"maxMarkedLocations":100,"tags":[],"tagsById":[],"distanceToolConfig":null,"mapConfig":{"tile_sets":[{"name":"Default","path":"\/games\/tarkov\/ground-zero\/in-game-v1","min_zoom":8,"max_zoom":13,"extension":"jpg","bounds":{"10":{"x":{"min":508,"max":511},"y":{"min":508,"max":511}},"11":{"x":{"min":1016,"max":1023},"y":{"min":1016,"max":1023}},"12":{"x":{"min":2032,"max":2047},"y":{"min":2032,"max":2047}},"13":{"x":{"min":4064,"max":4095},"y":{"min":4064,"max":4095}},"14":{"x":{"min":8128,"max":8191},"y":{"min":8128,"max":8191}},"15":{"x":{"min":16256,"max":16383},"y":{"min":16256,"max":16383}},"16":{"x":{"min":32512,"max":32767},"y":{"min":32512,"max":32767}},"17":{"x":{"min":65024,"max":65535},"y":{"min":65024,"max":65535}},"8":{"x":{"min":127,"max":127},"y":{"min":127,"max":127}},"9":{"x":{"min":254,"max":255},"y":{"min":254,"max":255}}}}],"initial_zoom":11,"start_lat":0.73157037868553,"start_lng":-0.804140120016,"overlay":null,"overzoom":false},"proCategoryLocationCounts":[],"searchQuery":null,"presets":[{"id":169694,"game_id":20,"title":"Extracts + PMC Spawns","categories":[953,954],"order":0,"is_demo_preset":true}]};window.specialData = [];window.isEditor = false;window.isEmbedded = false;window.isMini = false;window.partner = null;window.embedType = null;window.needsVerification = false;window.game = {"id":20,"title":"Escape From Tarkov","slug":"tarkov","ign_slug":"escape-from-tarkov","mapgenie_release_date":"2020-03-01T00:00:00.000000Z"};window.config = {"suggestionsEnabled":true,"newSuggestionsEnabled":true,"showRegionsInInfoWindow":false,"regionLocationFocusEnabled":false,"regionSelectorEnabled":false,"regionToggleEnabled":false,"iconSizeToggleEnabled":true,"altMapSdk":true,"proOnlyMedia":false,"v2popupEnabled":true,"copyrightFooterEnabled":false,"presetsEnabled":true,"compassEnabled":true,"routesEnabled":true,"checklistEnabled":false,"3dEnabled":false,"gridEnabled":false,"linkLinesEnabled":true,"mapStyle":null};</script><!-- JS Variables bounds here --></div>
+
+<!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/5.0.1/markdown-it.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js"></script>
+
+    <script>
+      window.isMobile = window.innerWidth < 768;
+      window.isMobile = window.isEmbedded ? window.embedType === 'compact' : window.isMobile;
+      window.md = window.markdownit({
+        html: false,
+      });
+      md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+        var token = tokens[idx];
+        var href = token.attrs[0][1];
+        if (href.endsWith('.mp3')) {
+          token.tag = "audio"
+          token.attrs = [['src', href], ['controls', 'true']]
+        } else {
+          token.attrPush(['target', '_blank']);
+        }
+        return self.renderToken(tokens, idx, options, env, self);
+      };
+      window.isOverwolf = false;
+    </script>
+        <script src="https://cdn.mapgenie.io/js/map.js?id=1622d3fae347911a1ea48ceb3556373f"></script>
+    <script>
+      if (isMobile) {
+        document.getElementById('categories').style.maxHeight = (window.innerHeight - 140) + "px";
+      }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css"/>
+
+            
+        
+    
+
+    
+
+
+    
+    
+        
+    <script>
+      if (window.gtag) {
+        setTimeout(function () {
+          window.gtag('event', 'view_map', {
+            'event_label': window.game.title + " - " + window.mapData.map.title,
+          });
+        }, 10000)
+      }
+    </script>
+
+    <link href="https://cdn.mapgenie.io/css/vendor/ionicons@4.2.6.min.css" rel="stylesheet">
+
+    <script>
+      var _comscore = _comscore || [];
+      _comscore.push({c1: "2", c2: "6036202"});
+
+      (function () {
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+        s.async = true;
+        s.src = "https://sb.scorecardresearch.com/cs/6036202/beacon.js";
+        el.parentNode.insertBefore(s, el);
+      })();
+    </script>
+    <noscript>
+        <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6036202&cv=3.6&cj=1">
+    </noscript>
+
+<script>
+  window.Analytics.setDefaultParams({
+    signed_in: 1,
+    section: null,
+    game_name: "tarkov",
+    page: "https://mapgenie.io/tarkov/maps/ground-zero",
+    source_platform: 'web',
+    content_group: "tarkov",
+  });
+  window.Analytics.trackEvent("pageview", {
+    pageview: 1,
+    previous_section: null,
+    from_component: null,
+  })
+</script>
+
+
+
+
+
+</body>
+</html>

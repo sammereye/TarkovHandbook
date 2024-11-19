@@ -1,29 +1,43 @@
 // #region PACKAGES
-const version = 101;
-const { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray, shell, dialog } = require('electron');
+const version = 200;
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray, shell, dialog, screen } = require('electron');
 const fs = require('fs');
 const MiniSearch = require('minisearch');
 const path = require('path');
 const cheerio = require('cheerio');
 const request = require('request');
-const extract = require('extract-zip');
 const { spawn } = require('child_process');
 app.disableHardwareAcceleration();
 // #endregion
 
 // #region DATABASES
-// PRODUCTION
-let confFileName = path.join(path.dirname(__dirname), 'app','public/db/config.json');
-// DEVELOPMENT
-// let confFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/config.json');
+
+let confFileName;
+if (app.isPackaged) {
+  // PRODUCTION
+  confFileName = path.join(path.dirname(__dirname), 'app','public/db/config.json');
+} else {
+  // DEVELOPMENT
+  confFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/config.json');
+}
+
 let confFile = fs.readFileSync(confFileName);
 let conf = JSON.parse(confFile);
 let toggle = conf.toggle;
 
-// PRODUCTION
-let progressFileName = path.join(path.dirname(__dirname), 'app','public/db/progress.json');
-// DEVELOPMENT
-// let progressFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/progress.json');
+let browserWindowIds = {};
+let track = true;
+let showPricingWindows = false;
+
+let progressFileName;
+if (app.isPackaged) {
+  // PRODUCTION
+  progressFileName = path.join(path.dirname(__dirname), 'app','public/db/progress.json');
+} else {
+  // DEVELOPMENT
+  progressFileName = path.join(path.dirname(__dirname), 'TarkovHandbook','public/db/progress.json');
+}
+
 let progressFile = fs.readFileSync(progressFileName);
 let progress = JSON.parse(progressFile);
 let tray = null;
@@ -54,7 +68,7 @@ let options = {
     'accept-language': 'en-US,en;q=0.9'
   },
   body: JSON.stringify({
-    "query": "{\n            itemsByType(type:any){\n                id\n                name\n                shortName\n                basePrice\n                normalizedName\n                types\n                width\n                height\n                avg24hPrice\n                wikiLink\n                changeLast48h\n                low24hPrice\n                high24hPrice\n                lastLowPrice\n                gridImageLink\n                iconLink\n                traderPrices {\n                    price\n                    trader {\n                        name\n                    }\n                }\n                sellFor {\n                    source\n                    price\n                    requirements {\n                        type\n                        value\n                    }\n                    currency\n                }\n                buyFor {\n                    source\n                    price\n                    currency\n                    requirements {\n                        type\n                        value\n                    }\n                }\n                containsItems {\n                    count\n                    item {\n                        id\n                    }\n                }\n            }\n        }"
+    "query": "{\n            itemsByType(type:any){\n                id\n                name\n                shortName\n                basePrice\n                normalizedName\n                types\n                width\n                height\n                avg24hPrice\n                wikiLink\n                changeLast48h\n                low24hPrice\n                high24hPrice\n                lastLowPrice\n            historicalPrices { price priceMin timestamp }\n                gridImageLink\n                iconLink\n                traderPrices {\n                    price\n                    trader {\n                        name\n                    }\n                }\n                sellFor {\n                    source\n                    price\n                    requirements {\n                        type\n                        value\n                    }\n                    currency\n                }\n                buyFor {\n                    source\n                    price\n                    currency\n                    requirements {\n                        type\n                        value\n                    }\n                }\n                containsItems {\n                    count\n                    item {\n                        id\n                    }\n                }\n            }\n        }"
   })
 };
 
@@ -218,7 +232,7 @@ async function updateData() {
 
   db = new MiniSearch({
     fields: ['name', 'shortName'], // fields to index for full-text search
-    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices', 'basePrice'], // fields to return with search results
+    storeFields: ['name', 'shortName', 'avg24hPrice', 'traderPrices', 'basePrice', 'width', 'height', "historicalPrices"], // fields to return with search results
     searchOptions: {
       fuzzy: 0.2, 
       prefix: true,
@@ -368,10 +382,14 @@ app.on('ready', () => {
   createWindow();
   globalShortcut.register(toggle, showWindow)
 
-  // PRODUCTION
-  tray = new Tray(path.join(path.dirname(__dirname), 'app','public/images/icon.ico'))
-  // DEVELOPMENT
-  // tray = new Tray('public/images/icon.ico')
+  
+  if (app.isPackaged) {
+    // PRODUCTION
+    tray = new Tray(path.join(path.dirname(__dirname), 'app','public/images/icon.ico'));
+  } else {
+    // DEVELOPMENT
+    tray = new Tray('public/images/icon.ico')
+  }
 
   const contextMenu = Menu.buildFromTemplate([
     { 
@@ -389,34 +407,165 @@ app.on('ready', () => {
   tray.setToolTip('Tarkov Search')
   tray.setContextMenu(contextMenu)
 
-  if (conf.updated) {
-    dialog.showMessageBox(app.window, { title: 'TarkovHandbook', message: `TarkovHandbook has been updated! Your new folder is named "${path.join(__dirname, '/../..').replaceAll('\\', '/').split('/').pop()}", you can delete the old folder named "${conf.pastFolder.split('/').pop()}"` })
+  // if (conf.updated) {
+  //   dialog.showMessageBox(app.window, { title: 'TarkovHandbook', message: `TarkovHandbook has been updated! Your new folder is named "${path.join(__dirname, '/../..').replaceAll('\\', '/').split('/').pop()}", you can delete the old folder named "${conf.pastFolder.split('/').pop()}"` })
   
-    delete conf.updated;
-    delete conf.pastFolder;
+  //   delete conf.updated;
+  //   delete conf.pastFolder;
   
-    fs.writeFileSync(confFileName, JSON.stringify(conf));
-  }
+  //   fs.writeFileSync(confFileName, JSON.stringify(conf));
+  // }
 
-  request('https://github.com/sammereye/TarkovHandbook/releases/tag/Latest', (e, r, body) => {
-    let $ = cheerio.load(body);
+  // request('https://github.com/sammereye/TarkovHandbook/releases/tag/Latest', (e, r, body) => {
+  //   let $ = cheerio.load(body);
 
-    let githubVersion = parseInt($('.d-inline.mr-3').text().replaceAll('.', '').replaceAll('v', ''))
+  //   let githubVersion = parseInt($('.d-inline.mr-3').text().replaceAll('.', '').replaceAll('v', ''))
 
-    if (githubVersion > version) {
-      dialog.showMessageBox(app.window, {title: 'TarkovHandbook', message: `New update available, go to Settings to update to version ${githubVersion.toString().split('').join('.')}!`, type: 'info'})
+  //   if (githubVersion > version) {
+  //     dialog.showMessageBox(app.window, {title: 'TarkovHandbook', message: `New update available, go to Settings to update to version ${githubVersion.toString().split('').join('.')}!`, type: 'info'})
+  //   }
+  // })
+
+  let popupWindow = new BrowserWindow({
+    id: 'popup-window',
+    frame: false,
+    transparent: true,
+    width: 0,
+    height: 0,
+    webPreferences: {
+      preload: __dirname + '\\pricePopupPreload.js'
+    }
+  });
+  
+  popupWindow.loadFile(path.join(__dirname, 'public/pricePopup.html'));
+  popupWindow.restore();
+  browserWindowIds['popup'] = popupWindow.id;
+
+  let priceListWindow = new BrowserWindow({
+    frame: false,
+    transparent: true,
+    width: 0,
+    height: 0,
+    x: 165,
+    y: 68,
+    webPreferences: {
+      preload: __dirname + '\\pricePopupPreload.js'
+    }
+  });
+  
+  priceListWindow.loadFile(path.join(__dirname, 'public/priceList.html'));
+  priceListWindow.restore();
+  browserWindowIds['price-list'] = priceListWindow.id;
+  
+  globalShortcut.register('F2', () => {
+    console.log('Removed top item')
+    priceListWindow.webContents.send('remove-last');
+  })
+  
+  globalShortcut.register('F4', () => {
+    if (showPricingWindows) {
+      console.log('Hiding Pricing Windows')
+      popupWindow.setBounds({width: 0, height: 0})
+      priceListWindow.setBounds({width: 0, height: 0})
+      showPricingWindows = false;
+    } else {
+      console.log('Showing Pricing Windows')
+      popupWindow.setBounds({width: 250, height: 30})
+      priceListWindow.setBounds({width: 675, height: 125})
+      showPricingWindows = true;
     }
   })
+
+  globalShortcut.register('F5', () => {
+    console.log('Wiped list')
+    priceListWindow.webContents.send('wipe');
+  })
+
+  let ocrProcess = spawn('./ocr/ocr_cpp.exe');
+  let alwaysOnTopProcess = spawn('./ocr/setalwaysontop.exe');
+  
+  alwaysOnTopProcess.on('close', function(code) {
+    if (code == 0) {
+      setTimeout(() => {
+        priceListWindow.setSkipTaskbar(true);
+        // popupWindow.webContents.openDevTools();
+        popupWindow.setSkipTaskbar(true);
+      }, 1000)
+    }
+  });
+  
+  ocrProcess.stdout.setEncoding('utf-8');
+  ocrProcess.stdout.on('data', function(data) {
+    let text = new String(data);
+    let incomingData = text.toString().trim();
+    if (incomingData === 'MOUSEMOVE') {
+      popupWindow.setBounds({width: 0, height: 0})
+      popupWindow.webContents.send('hide', null)
+    } else if (incomingData === 'RESOLUTIONERROR') {
+      console.log("RESOLUTIONERROR");
+    } else if (incomingData.includes('||')) {
+      let incomingDataCleanedUp = incomingData.replace(/[^\x00-\x7F]/g, "");
+      let itemName = incomingDataCleanedUp.split("||")[0];
+      let coords = incomingDataCleanedUp.split("||")[1];
+      let x = parseInt(coords.split(',')[0]);
+      let y = parseInt(coords.split(',')[1]);
+      let results = db.search(itemName)
+      if (results.length > 0) {
+        let newItem = results[0];
+        console.log(`${newItem.name} : ${newItem.score} : ${itemName}`)
+        if (newItem.score >= 50 || newItem.name.trim() === itemName.trim()) {
+          const mousePos = screen.getCursorScreenPoint();
+          if (mousePos.x === x && mousePos.y === y) {
+            popupWindow.setPosition(mousePos.x + 13, mousePos.y + 13)
+            
+            if (newItem) {
+              if (newItem.id in questItems) {
+                newItem.quests = questItems[newItem.id];
+              }
+      
+              popupWindow.webContents.send('data', JSON.stringify(newItem));
+              priceListWindow.webContents.send('data', JSON.stringify(newItem));
+              popupWindow.setBounds({width: 250, height: 150})
+            }
+          }
+        }
+      }
+    } else {
+      console.log(`Potential OCR Issue: ${incomingData}`);
+    }
+  });
+  
+  ocrProcess.stderr.setEncoding('utf-8');
+  ocrProcess.stderr.on('data', function(data) {
+    console.log('stderr: ' + data);
+  });
+  
+  ocrProcess.on('close', function(code) {
+    console.log('closing code: ' + code);
+  });
 })
+
+ipcMain.on('blur-price-window', (e) => {
+  console.log('blurring window');
+  let priceListWindow = BrowserWindow.fromId(browserWindowIds['price-list']);
+  let popupWindow = BrowserWindow.fromId(browserWindowIds['popup']);
+  if (priceListWindow && popupWindow) {
+    priceListWindow.blur();
+    popupWindow.blur();
+    console.log('window blurred');
+  }
+});
 
 app.on('browser-window-blur', () => {
   app.window.webContents.send('reset')
   app.window.minimize();
 });
 
+
 ipcMain.on('close', (e) => {
   app.window.minimize();
 });
+
 
 function createWindow () {
   // Create the browser window.
@@ -426,6 +575,7 @@ function createWindow () {
     fullscreen: true,
     skipTaskbar: true,
     transparent: true,
+    alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
@@ -433,7 +583,7 @@ function createWindow () {
   })
 
   // win.minimize();
-
+  win.setAlwaysOnTop(true, 'pop-up-menu')
   app.window = win
 
   app.window.loadFile('public/index.html')
@@ -462,43 +612,66 @@ ipcMain.on('autoUpdate', (e) => {
       request('https://github.com/sammereye/TarkovHandbook/releases/download/Latest/TarkovHandbook-latest.zip')
       .pipe(fs.createWriteStream('update.zip'))
       .on('close', async function () {
-        // PRODUCTION
-        let currentFolderName = path.join(__dirname, '/../..').split('\\').pop().split('-')[0];
-        // DEVELOPMENT
-        // let currentFolderName = __dirname.split('\\').pop().split('-')[0];
+        
+        let currentFolderName;
+        if (app.isPackaged) {
+          // PRODUCTION
+          currentFolderName = path.join(__dirname, '/../..').split('\\').pop().split('-')[0];
+        } else {
+          // DEVELOPMENT
+          currentFolderName = __dirname.split('\\').pop().split('-')[0];
+        }
 
-        // PRODUCTION
-        await extract('update.zip', {dir: path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)});
-        // DEVELOPMENT
-        // await extract('update.zip', {dir: path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)})
-        fs.unlinkSync('update.zip');
+        // if (app.isPackaged) {
+        //   // PRODUCTION
+        //   await extract('update.zip', {dir: path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)});
+        // } else {
+        //   // DEVELOPMENT
+        //   await extract('update.zip', {dir: path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`)})
+        // }
+        // fs.unlinkSync('update.zip');
         
         // Write current progess to new folder
-        // PRODUCTION
-        let newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'progress.json');
-        // DEVELOPMENT
-        // let newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'progress.json')
+        let newProgressFilePath;
+        if (app.isPackaged) {
+          // PRODUCTION
+          newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'progress.json');
+        } else {
+          // DEVELOPMENT
+          newProgressFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'progress.json')
+        }
         fs.writeFileSync(newProgressFilePath, JSON.stringify(progress));
         
         conf.updated = true;
 
-        // PRODUCTION
-        conf.pastFolder = path.join(__dirname, '/../..').replaceAll('\\', '/');
-        // DEVELOPMENT
-        // conf.pastFolder = __dirname.replaceAll('\\', '/');
+        if (app.isPackaged) {
+          // PRODUCTION
+          conf.pastFolder = path.join(__dirname, '/../..').replaceAll('\\', '/');
+        } else {
+          // DEVELOPMENT
+          conf.pastFolder = __dirname.replaceAll('\\', '/');
+        }
 
         // Write current config to new folder
-        // PRODUCTION
-        let newConfigFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'config.json');
-        // DEVELOPMENT
-        // let newConfigFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'config.json')
+        let newConfigFilePath;
+        if (app.isPackaged) {
+          // PRODUCTION
+          newConfigFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'resources', 'app', 'public', 'db', 'config.json');
+        } else {
+          // DEVELOPMENT
+          newConfigFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'resources', 'app', 'public', 'db', 'config.json')
+        }
         fs.writeFileSync(newConfigFilePath, JSON.stringify(conf));
 
         // Start new process
-        // PRODUCTION
-        let exeFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook.exe');
-        // DEVELOPMENT
-        // let exeFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'TarkovHandbook.exe')
+        let exeFilePath;
+        if (app.isPackaged) {
+          // PRODUCTION
+          exeFilePath = path.join(path.join(__dirname, '/../../..'), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook.exe');
+        } else {
+          // DEVELOPMENT
+          exeFilePath = path.join(path.dirname(__dirname), `${currentFolderName}-${$('.d-inline.mr-3').text().replaceAll('v', '')}`, 'TarkovHandbook-win32-ia32', 'TarkovHandbook.exe')
+        }
         spawn(exeFilePath, [], {detached: true});
         app.quit();
       });
@@ -649,14 +822,16 @@ function resetHideoutItems() {
 // #region ITEMS
 ipcMain.on('itemSearch', (e, val) => {
   let results = db.search(val)
-  condensedResults = results.slice(0, 4);
-  for (let i in condensedResults) {
-    if (condensedResults[i].id in questItems) {
-      condensedResults[i]['quests'] = questItems[condensedResults[i].id]
-    }
-
-    if (condensedResults[i].id in hideoutItems) {
-      condensedResults[i]['hideout'] = hideoutItems[condensedResults[i].id]
+  if (results.length > 0) {
+    condensedResults = results.slice(0, 4);
+    for (let i in condensedResults) {
+      if (condensedResults[i].id in questItems) {
+        condensedResults[i]['quests'] = questItems[condensedResults[i].id]
+      }
+  
+      if (condensedResults[i].id in hideoutItems) {
+        condensedResults[i]['hideout'] = hideoutItems[condensedResults[i].id]
+      }
     }
   }
 

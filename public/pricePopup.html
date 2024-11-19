@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Price Popup</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #price-container {
+    padding: 4px;
+    background-color: white;
+    border-radius: 3px;
+    height: fit-content;
+    width: fit-content;
+  }
+
+  #price-box {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgb(37, 37, 42);
+  }
+
+  #price {
+    font-weight: 900;
+    font-size: 15px;
+  }
+
+  #chart {
+    width: 50px;
+    height: 30px;
+  }
+
+  .quest {
+    display: flex;
+    align-items: center;
+  }
+
+  .quest svg {
+    margin-right: 4px;
+  }
+</style>
+<body>
+  <div id="price-container">
+    <div id="price-box">OOF</div>
+    <!-- <div id="chart"
+      data-dailychart-values="12.94,13.0,12.98,13.02,13.0,13.0,12.95,12.85,13.04,13.13"
+      data-dailychart-close="13.08"
+      data-dailychart-length="10">
+    </div> -->
+  </div>
+  <!-- <script src='https://unpkg.com/dailychart/dist/dailychart.min.js'></script> -->
+  <script src="scripts/pricePopupScript.js"></script>
+</body>
+</html>
